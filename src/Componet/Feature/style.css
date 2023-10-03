@@ -1,0 +1,8 @@
+.custom-description-text {
+    font-size: 14pt;
+}
+
+.custom-description-text:hover {
+    color: #f34960;
+    border-color: #f34960;
+}
