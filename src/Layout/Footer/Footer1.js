@@ -42,8 +42,7 @@ function Footer1() {
                                 W<span className="text-dark font-w-4">inck.</span>
                             </Link>
                             <p className="my-3">
-                                geniusrise.health - Bootstrap 5 Multipurpose Landing Page Is fully
-                                responsible, Build whatever you like with the geniusrise.health.
+                                geniusrise.health - clinical AI assistants for hospitals, clinics and healthcare practices.
                             </p>
                             <ul className="list-inline">
                                 <li className="list-inline-item">
