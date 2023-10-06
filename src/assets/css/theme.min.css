@@ -512,8 +512,8 @@ Shadow
   left: 0;
   width: 100%;
   z-index: 999 !important;
-  background: #ffffff !important;
-  box-shadow: 0 10px 30px 5px rgba(1, 164, 121, 0.06) !important;
+  background: #000000 !important;
+  box-shadow: 0 10px 30px 5px rgba(255, 255, 255, 0.1) !important;
   animation: smoothScroll 1s forwards;
 }
 
