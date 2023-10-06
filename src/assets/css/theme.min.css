@@ -9,8 +9,9 @@ body {
   font-style: normal;
   font-size: 1rem;
   font-weight: 400;
-  color: #535353;
+  color: #bdbdbd;
   overflow-x: hidden;
+  background-color: rgb(0, 0, 0);
 }
 
 .page-wrapper {
@@ -26,6 +27,18 @@ a:hover {
   color: #f34960;
 }
 
+.feature-background {
+  background-image: url(../images/intestine.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.feature-content {
+  background-color: rgba(0, 0, 0, 0.93);
+  border-radius: 30px;
+  font-weight: 700;
+}
+
 h1,
 h2,
 h3,
@@ -39,8 +52,8 @@ h6,
 .h5,
 .h6 {
   margin-bottom: 0.5rem;
-  color: #2f2f41;
-  font-weight: 700;
+  color: #ffffff;
+  font-weight: bolder;
   line-height: 1.3;
 }
 
@@ -105,7 +118,7 @@ p {
 }
 
 .text-light {
-  color: #a6aaad !important;
+  color: #ffffff !important;
 }
 
 a.text-light:focus,
@@ -301,7 +314,7 @@ Button
 }
 
 .btn-primary {
-  color: #2f2f41;
+  color: #ffffff;
   background-color: rgba(239, 8, 8, 0.1);
   border-color: #f34960;
 }
@@ -721,7 +734,7 @@ header .navbar-nav .nav-item {
     Hero Shape
 ------------------------*/
 .hero-shape1:before {
-  width: 50%;
+  /* width: 50%;
   height: 100%;
   background: #fcfbf7;
   content: "";
@@ -729,7 +742,7 @@ header .navbar-nav .nav-item {
   right: 0;
   top: 0;
   z-index: -1;
-  border-bottom-left-radius: 30%;
+  border-bottom-left-radius: 30%; */
 }
 
 .hero-shape2:before {
@@ -1295,9 +1308,9 @@ Countdown
 .feature-hover:before {
   width: 100%;
   height: 100%;
-  background: #ffffff;
-  border-radius: 30% 90% 20% 30% / 30% 90% 30% 30%;
-  box-shadow: 0 10px 30px 5px rgba(1, 164, 121, 0.06);
+  /* background: #ffffff; */
+  /* border-radius: 30% 90% 20% 30% / 30% 90% 30% 30%; */
+  /* box-shadow: 0 10px 30px 5px rgba(1, 164, 121, 0.06); */
   content: "";
   position: absolute;
   left: 0;

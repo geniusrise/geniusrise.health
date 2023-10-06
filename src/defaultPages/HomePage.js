@@ -15,8 +15,8 @@ function HomePage() {
         <Featurestart />
         <AboutL1 />
         <Multisecstart />
-        <TestimonialL1 />
-        <Blog />
+        {/* <TestimonialL1 /> */}
+        {/* <Blog /> */}
         <Newsletter />
       </div>
     </div>

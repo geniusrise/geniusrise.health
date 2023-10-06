@@ -82,7 +82,7 @@ const Header1 = () => {
                                 {/* Navbar */}
                                 <Navbar className="navbar navbar-expand-lg navbar-light">
                                     <Link className="navbar-brand logo text-primary mb-0 font-w-7o" to="/">
-                                        Geniusrise<span class="text-dark font-w-4"> Health</span>
+                                        Geniusrise<span class="text-light font-w-4"> Health</span>
                                     </Link>
                                     <button
                                         className="navbar-toggler"
@@ -95,91 +95,6 @@ const Header1 = () => {
                                     >
                                         <span className="navbar-toggler-icon"></span>
                                     </button>
-                                    <Collapse
-                                        isOpen={isOpen}
-                                        className="collapse navbar-collapse"
-                                        navbar
-                                    >
-                                        <Nav className="mx-auto" navbar>
-                                            {navLinks.map((navLink, index) => (
-                                                <NavItem key={index}>
-                                                    {navLink.type && navLink.type === "subMenu" ? (
-                                                        <UncontrolledDropdown nav inNavbar isOpen={openMenus.includes(index)}
-                                                            toggle={() => toggleMenu(index)}
-                                                            onMouseLeave={closeAllMenus}>
-                                                            <DropdownToggle nav caret >
-                                                                {navLink.menu_title}
-                                                            </DropdownToggle>
-                                                            <DropdownMenu
-                                                                id={`submenu_${index}`}
-                                                                className="dropdown-menu"
-
-                                                            >
-                                                                {navLink.child_routes &&
-                                                                    navLink.child_routes.map((subNavLink, keys) =>
-                                                                        subNavLink.type &&
-                                                                            subNavLink.type === "childsubMenu" ? (
-                                                                            <UncontrolledDropdown
-                                                                                inNavbar
-                                                                                className="dropdown-submenu"
-                                                                                key={keys}
-                                                                            >
-                                                                                <DropdownToggle
-                                                                                    tag="a"
-                                                                                    caret
-                                                                                    className="dropdown-item dropdown-toggle cursor-pointe"
-                                                                                >
-                                                                                    {subNavLink.menu_title}
-                                                                                </DropdownToggle>
-                                                                                {/* Sub Menu Start */}
-                                                                                <DropdownMenu
-                                                                                    id={`childsubmenu_${keys}`}
-                                                                                    className="dropdown-menu"
-                                                                                >
-                                                                                    {subNavLink.child_routes &&
-                                                                                        subNavLink.child_routes.map(
-                                                                                            (ChildsubNavLink, i) => (
-                                                                                                <DropdownItem
-                                                                                                    key={i}
-                                                                                                    tag={Link}
-                                                                                                    to={ChildsubNavLink.path}
-
-                                                                                                >
-                                                                                                    {ChildsubNavLink.menu_title}
-                                                                                                </DropdownItem>
-                                                                                            )
-                                                                                        )}
-                                                                                </DropdownMenu>
-                                                                                {/* Sub Menu End */}
-                                                                            </UncontrolledDropdown>
-                                                                        ) : (
-                                                                            <ul className="list-unstyled" key={keys}>
-                                                                                <li>
-                                                                                    <DropdownItem
-                                                                                        tag={Link}
-                                                                                        to={subNavLink.path}
-                                                                                    >
-                                                                                        {subNavLink.menu_title}
-                                                                                    </DropdownItem>
-                                                                                </li>
-                                                                            </ul>
-                                                                        )
-                                                                    )}
-                                                            </DropdownMenu>
-                                                        </UncontrolledDropdown>
-                                                    ) : (
-                                                        <NavLink href={navLink.path}>
-                                                            {navLink.menu_title}
-                                                        </NavLink>
-                                                    )}
-                                                </NavItem>
-                                            ))}
-                                        </Nav>
-                                    </Collapse>
-                                    <div className="d-sm-flex align-items-center justify-content-end">
-                                        <Link className="btn-link" to="login">Login</Link>
-                                        <Link className="btn btn-primary btn-sm ms-3 d-sm-inline-block d-none" to="signup">Sign Up</Link>
-                                    </div>
                                 </Navbar>
                             </div>
                         </div>

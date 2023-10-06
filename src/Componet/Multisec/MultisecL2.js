@@ -20,20 +20,20 @@ function MultisecL2() {
                         <VideoBox1 />
                     </Col>
                     <Col lg="6">
-                    <div className="mb-5">
-                        <h2><span className="font-w-4 d-block">Perfect Solution</span> For your Small Business</h2>
-                        <p className="lead">geniusrise.health Amazing Landing Page of businesses need access to development resources.</p>
-                    </div>
-                    <Row className="align-items-center">
-                        {clientLogos.map((logo, index) => (
-                            <Col key={index} md="4" sm="4" xs="6" className={`mt-6 ${index >= 3 ? 'mt-sm-0' : 'mt-sm-0'}`}>
-                                <div className="client-logo">
-                                    <img className="img-fluid" src={logo} alt={`Client Logo ${index + 1}`} />
-                                </div>
-                            </Col>
-                        ))}
-                    </Row>
-                </Col>
+                        <div className="mb-5">
+                            <h2><span className="font-w-4 d-block">Perfect Solution</span> For your Small Business</h2>
+                            <p className="lead">geniusrise.health Amazing Landing Page of businesses need access to development resources.</p>
+                        </div>
+                        <Row className="align-items-center">
+                            {clientLogos.map((logo, index) => (
+                                <Col key={index} md="4" sm="4" xs="6" className={`mt-6 ${index >= 3 ? 'mt-sm-0' : 'mt-sm-0'}`}>
+                                    <div className="client-logo">
+                                        <img className="img-fluid" src={logo} alt={`Client Logo ${index + 1}`} />
+                                    </div>
+                                </Col>
+                            ))}
+                        </Row>
+                    </Col>
                 </Row>
             </Container>
         </section>

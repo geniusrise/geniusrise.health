@@ -123,12 +123,12 @@ function App() {
           <Routes>
             {/* difaultHompage */}
             <Route path='/' element={<HomePage />} />
-            <Route path='/Login' element={<Login />} />
-            <Route path='/Signup' element={<Signup />} />
+            {/* <Route path='/Login' element={<Login />} />
+            <Route path='/Signup' element={<Signup />} /> */}
             {/* difaultHompage */}
 
             {/* NavbarHome */}
-            <Route path='/' element={<Landing1 />} />
+            {/* <Route path='/' element={<Landing1 />} /> */}
             {/* <Route path='/index2' element={<Landing2 />} />
             <Route path='/index3' element={<Landing3 />} />
             <Route path='/index4' element={<Landing4 />} /> */}
@@ -139,7 +139,7 @@ function App() {
             <Route path='/blog-single' element={<BlogSingle />} /> */}
 
             {/* NavbarHome */}
-            <Route path='/about-us' element={<AboutUs />} />
+            {/* <Route path='/about-us' element={<AboutUs />} />
             <Route path='/about-us2' element={<AboutUs2 />} />
             <Route path='/career' element={<Career />} />
             <Route path='/career-single' element={<CareerSingle />} />
@@ -168,7 +168,7 @@ function App() {
             <Route path='/Price_table' element={<FeaturePricePage />} />
             <Route path='/team' element={<FeatureTeamPage />} />
             <Route path='/testimonial' element={<FeatureTestimonialPage />} />
-            <Route path='/blog' element={<FeatureBlogPage />} />
+            <Route path='/blog' element={<FeatureBlogPage />} /> */}
             <Route path="*" element={<Error404 />} />
 
             {/* Company */}
