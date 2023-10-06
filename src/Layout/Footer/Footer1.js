@@ -39,31 +39,27 @@ function Footer1() {
                                 className="footer-logo h2 text-primary mb-0 font-w-7"
                                 to="/"
                             >
-                                W<span className="text-dark font-w-4">inck.</span>
+                                Geniusrise<span className="text-dark font-w-4"> Health.</span>
                             </Link>
                             <p className="my-3">
                                 geniusrise.health - clinical AI assistants for hospitals, clinics and healthcare practices.
                             </p>
                             <ul className="list-inline">
                                 <li className="list-inline-item">
-                                    <Link className="border rounded px-2 py-1 text-dark" to="/"
-                                    ><i className="la la-facebook"></i></Link>
+                                    <Link className="border rounded px-2 py-1 text-dark" to="https://github.com/geniusrise"
+                                    ><i className="la la-github"></i></Link>
                                 </li>
                                 <li className="list-inline-item">
-                                    <Link className="border rounded px-2 py-1 text-dark" to="/"
-                                    ><i className="la la-dribbble"></i></Link>
-                                </li>
-                                <li className="list-inline-item">
-                                    <Link className="border rounded px-2 py-1 text-dark" to="/"
-                                    ><i className="la la-instagram"></i></Link>
-                                </li>
-                                <li className="list-inline-item">
-                                    <Link className="border rounded px-2 py-1 text-dark" to="/"
+                                    <Link className="border rounded px-2 py-1 text-dark" to="https://twitter.com/genius_rise"
                                     ><i className="la la-twitter"></i></Link>
                                 </li>
                                 <li className="list-inline-item">
-                                    <Link className="border rounded px-2 py-1 text-dark" to="/"
+                                    <Link className="border rounded px-2 py-1 text-dark" to="https://www.linkedin.com/company/geniusrise/"
                                     ><i className="la la-linkedin"></i></Link>
+                                </li>
+                                <li className="list-inline-item">
+                                    <Link className="border rounded px-2 py-1 text-dark" to="https://huggingface.co/geniusrise"
+                                    ><i className="la la-facebook"></i></Link>
                                 </li>
                             </ul>
                         </div>
@@ -73,57 +69,30 @@ function Footer1() {
                                     <h5 className="mb-4">Pages</h5>
                                     <ul className="list-unstyled mb-0">
                                         <li className="mb-3">
-                                            <Link className="list-group-item-action" to="/about-us"
-                                            >About</Link>
+                                            <Link className="list-group-item-action" to="https://geniusrise.ai"
+                                            >Geniusrise</Link>
                                         </li>
                                         <li className="mb-3">
-                                            <Link className="list-group-item-action" to="/product-grid"
-                                            >Shop</Link>
-                                        </li>
-                                        <li className="mb-3">
-                                            <Link className="list-group-item-action" to="/faq">Faq</Link>
+                                            <Link className="list-group-item-action" to="https://github.com/geniusrise"
+                                            >Github</Link>
                                         </li>
                                         <li>
-                                            <Link className="list-group-item-action" to="/contact1"
-                                            >Contact Us</Link>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div className="col-12 col-sm-4 mt-6 mt-sm-0 navbar-light">
-                                    <h5 className="mb-4">Service</h5>
-                                    <ul className="list-unstyled mb-0">
-                                        <li className="mb-3">
-                                            <Link className="list-group-item-action" to="/"
-                                            >Content Writing</Link>
-                                        </li>
-                                        <li className="mb-3">
-                                            <Link className="list-group-item-action" to="/"
-                                            >Documentation</Link>
-                                        </li>
-                                        <li className="mb-3">
-                                            <Link className="list-group-item-action" to="/sign_in"
-                                            >Account</Link>
-                                        </li>
-                                        <li>
-                                            <Link className="list-group-item-action" to="/career"
-                                            >Careers</Link>
+                                            <Link className="list-group-item-action" to="https://huggingface.co/geniusrise"
+                                            >Huggingface</Link>
                                         </li>
                                     </ul>
                                 </div>
                                 <div className="col-12 col-sm-4 mt-6 mt-sm-0 navbar-light">
                                     <h5 className="mb-4">Our Address</h5>
                                     <div className="mb-3">
-                                        <p className="mb-0 text-muted">
-                                            423B, Road Wordwide Country, USA
+                                        <p className="mb-0 text-dark">
+                                            Cinnabar Hills, Embassy Golf Links Business Park
+                                            Challaghatta, Bengaluru, Karnataka 560071, India
                                         </p>
                                     </div>
                                     <div className="mb-3">
-                                        <Link className="btn-link" to="mailto:skytouchinfotech.com">
-                                            skytouchinfotech.com</Link>
-                                    </div>
-                                    <div>
-                                        <Link className="btn-link" to="tel:+912345678900"
-                                        >+91-234-567-8900</Link>
+                                        <Link className="btn-link text-dark" to="mailto:hello@geniusrise.ai">
+                                            hello@geniusrise.ai</Link>
                                     </div>
                                 </div>
                             </div>

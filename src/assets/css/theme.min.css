@@ -39,6 +39,10 @@ a:hover {
   font-weight: 700;
 }
 
+.text-dark {
+  color: #ffffff !important;
+}
+
 h1,
 h2,
 h3,
@@ -106,7 +110,7 @@ p {
 }
 
 .text-dark {
-  color: #2f2f41 !important;
+  color: #2f2f41;
 }
 
 .text-primary {

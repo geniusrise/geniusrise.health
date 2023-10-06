@@ -17,7 +17,7 @@ function HomePage() {
         <Multisecstart />
         {/* <TestimonialL1 /> */}
         {/* <Blog /> */}
-        <Newsletter />
+        {/* <Newsletter /> */}
       </div>
     </div>
   )

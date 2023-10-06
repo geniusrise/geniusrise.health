@@ -74,42 +74,31 @@ const Header1 = () => {
 
     return (
         <header id="site-header" className="header">
-            {!loader ? (
-                <div id="header-wrap" className={`${visible ? 'fixed-header ' : ''}`}>
-                    <div className="container">
-                        <div className="row">
-                            <div className="col">
-                                {/* Navbar */}
-                                <Navbar className="navbar navbar-expand-lg navbar-light">
-                                    <Link className="navbar-brand logo text-primary mb-0 font-w-7o" to="/">
-                                        Geniusrise<span class="text-light font-w-4"> Health</span>
-                                    </Link>
-                                    <button
-                                        className="navbar-toggler"
-                                        type="button"
-                                        data-toggle="collapse"
-                                        data-target="#navbarNavDropdown"
-                                        aria-expanded="false"
-                                        aria-label="Toggle navigation"
-                                        onClick={toggle}
-                                    >
-                                        <span className="navbar-toggler-icon"></span>
-                                    </button>
-                                </Navbar>
-                            </div>
+            <div id="header-wrap" className={`${visible ? 'fixed-header ' : ''}`}>
+                <div className="container">
+                    <div className="row">
+                        <div className="col">
+                            {/* Navbar */}
+                            <Navbar className="navbar navbar-expand-lg navbar-light">
+                                <Link className="navbar-brand logo text-primary mb-0 font-w-7o" to="/">
+                                    Geniusrise<span class="text-light font-w-4"> Health</span>
+                                </Link>
+                                <button
+                                    className="navbar-toggler"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#navbarNavDropdown"
+                                    aria-expanded="false"
+                                    aria-label="Toggle navigation"
+                                    onClick={toggle}
+                                >
+                                    <span className="navbar-toggler-icon"></span>
+                                </button>
+                            </Navbar>
                         </div>
                     </div>
                 </div>
-            ) : (
-                <div id="ht-preloader">
-                    <div className="loader clear-loader"> <span>W</span>
-                        <span>i</span>
-                        <span>n</span>
-                        <span>c</span>
-                        <span>k</span>
-                    </div>
-                </div>
-            )}
+            </div>
         </header>
     );
 };
