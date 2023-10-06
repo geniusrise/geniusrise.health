@@ -107,7 +107,7 @@ function Footer1() {
                         <div className="col-md-6">
                             Copyright ©2020 All rights reserved | geniusrise.health is made by
                             <i className="lar la-heart text-primary heartBeat2"></i>
-                            <u><Link className="text-primary" to="/">  Skytouch Infotech</Link></u>
+                            <u><Link className="text-primary" to="https://geniusrise.ai">  geniusrise.ai</Link></u>
                         </div>
                         <div className="col-md-6 text-md-end mt-3 mt-md-0">
                             <ul className="list-inline mb-0">
@@ -120,9 +120,6 @@ function Footer1() {
                                     <Link className="list-group-item-action" to="/">
                                         Privacy Policy
                                     </Link>
-                                </li>
-                                <li className="list-inline-item">
-                                    <Link className="list-group-item-action" to="/"> Support </Link>
                                 </li>
                             </ul>
                         </div>
