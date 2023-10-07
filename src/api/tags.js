@@ -1,11 +1,2 @@
-const tags = [
-  "Agency",
-  "Web Design",
-  "Saas",
-  "Corporate",
-  "Creative",
-  "Software",
-  "Landing",
-  "Startup",
-];
+const tags = ['Agency', 'Web Design', 'Saas', 'Corporate', 'Creative', 'Software', 'Landing', 'Startup'];
 export default tags;

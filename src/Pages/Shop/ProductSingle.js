@@ -1,46 +1,31 @@
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-    Col,
-    Container,
-    Input,
-    Nav,
-    NavItem,
-    NavLink,
-    Row,
-    TabContent,
-    TabPane,
-    Table
-} from "reactstrap";
-import HerosectionHeader from "../../Componet/Herosection/HerosectionHeader";
-import { addToCart, addToWishList } from "../../store/reducer/productReducer";
-import RatingList from "./RatingList";
-import ReviewForm from "./ReviewForm";
-import ReviewList from "./ReviewList";
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Col, Container, Input, Nav, NavItem, NavLink, Row, TabContent, TabPane, Table } from 'reactstrap';
+import HerosectionHeader from '../../Componet/Herosection/HerosectionHeader';
+import { addToCart, addToWishList } from '../../store/reducer/productReducer';
+import RatingList from './RatingList';
+import ReviewForm from './ReviewForm';
+import ReviewList from './ReviewList';
 
 function ProductSingle() {
     const dispatch = useDispatch();
     const allProducts = useSelector((state) => state.products.allProducts);
 
     const id = useSelector((state) => state.products.selectedProduct);
-    const filteredProducts = useSelector(
-        (state) => state.products.filteredProducts
-    );
+    const filteredProducts = useSelector((state) => state.products.filteredProducts);
     let product = filteredProducts.find((p) => p.id === Number(id));
-    useEffect(() => {
-
-    }, [product])
+    useEffect(() => {}, [product]);
     const [quantity, setQuantity] = useState(1);
-    const [activeTab, setActiveTab] = useState("1");
+    const [activeTab, setActiveTab] = useState('1');
 
     const toggle = (tab) => {
         if (activeTab !== tab) setActiveTab(tab);
     };
 
-    const [selectedSize, setSelectedSize] = useState("");
-    const [selectedColor, setSetlectedColor] = useState("");
+    const [selectedSize, setSelectedSize] = useState('');
+    const [selectedColor, setSetlectedColor] = useState('');
     const handleSizeChange = (event) => {
         setSelectedSize(event.target.value);
     };
@@ -80,21 +65,21 @@ function ProductSingle() {
             return imageGalleryView.push({
                 original: require(`../../assets/images/` + image),
                 thumbnail: require(`../../assets/images/` + image),
-            })
+            });
         });
     } else {
         product.pictures.map((image, index) => {
-           return imageGalleryView.push({
+            return imageGalleryView.push({
                 original: require(`../../assets/images/` + image),
                 thumbnail: require(`../../assets/images/` + image),
-            })
+            });
         });
     }
 
     if (product === undefined ? (product = allProducts[0]) : product)
         return (
             <div className="page-wrapper">
-                <HerosectionHeader name={"Product Single"} folder1={"Shop"} />
+                <HerosectionHeader name={'Product Single'} folder1={'Shop'} />
 
                 <div className="page-content">
                     <div>
@@ -110,12 +95,13 @@ function ProductSingle() {
                                     </Col>
                                     <Col lg={7} md={6} className="mt-5 mt-lg-0">
                                         <div className="product-details">
-                                            <h4>
-                                                {product.name}
-                                            </h4>
+                                            <h4>{product.name}</h4>
 
                                             <div className="product-price my-4">
-                                                <span class="d-block"> ${product.salePrice} <del>${product.price} </del></span>
+                                                <span class="d-block">
+                                                    {' '}
+                                                    ${product.salePrice} <del>${product.price} </del>
+                                                </span>
                                                 <span className="text-primary">
                                                     {Array.from({ length: product.rating }).map((_, index) => (
                                                         <i key={index} className="las la-star"></i>
@@ -134,7 +120,7 @@ function ProductSingle() {
                                             <p className="mb-4">{product.description}</p>
 
                                             <div className="row my-4">
-                                                <Col lg={5} sm={6} >
+                                                <Col lg={5} sm={6}>
                                                     <h6 className="mb-2 text-black">Size</h6>
                                                     <Input
                                                         type="select"
@@ -152,13 +138,17 @@ function ProductSingle() {
                                                                 {size}
                                                             </option>
                                                         ))}
-                                                    </Input></Col>
+                                                    </Input>
+                                                </Col>
                                                 <Col lg={7} sm={6} className="mt-3 mt-sm-0">
                                                     <div class="widget-color">
                                                         <h6 className="mb-2 text-black">Color</h6>
                                                         <div className="d-flex">
                                                             {product.colors.map((col, index) => (
-                                                                <div className="form-check ps-0 me-3 list-inline" key={index}>
+                                                                <div
+                                                                    className="form-check ps-0 me-3 list-inline"
+                                                                    key={index}
+                                                                >
                                                                     <input
                                                                         type="radio"
                                                                         className="form-check-input"
@@ -196,10 +186,7 @@ function ProductSingle() {
                                                         value={quantity}
                                                         onChange={(e) => {
                                                             const newQuantity = parseInt(e.target.value);
-                                                            if (
-                                                                newQuantity >= 1 &&
-                                                                newQuantity <= product.stock
-                                                            ) {
+                                                            if (newQuantity >= 1 && newQuantity <= product.stock) {
                                                                 setQuantity(newQuantity);
                                                             }
                                                         }}
@@ -208,8 +195,7 @@ function ProductSingle() {
                                                     <button
                                                         className="btn-product btn-product-down"
                                                         onClick={() => {
-                                                            if (quantity < product.stock)
-                                                                setQuantity(quantity + 1);
+                                                            if (quantity < product.stock) setQuantity(quantity + 1);
                                                         }}
                                                     >
                                                         <i className="las la-plus"></i>
@@ -243,18 +229,21 @@ function ProductSingle() {
                             <Container>
                                 <Row>
                                     <Col md={12}>
-                                        <Nav tabs className="nav nav-tabs" style={{ cursor: 'pointer', borderBottom: 'none' }}>
+                                        <Nav
+                                            tabs
+                                            className="nav nav-tabs"
+                                            style={{ cursor: 'pointer', borderBottom: 'none' }}
+                                        >
                                             <NavItem>
                                                 <NavLink
                                                     className={
-                                                        activeTab === "1"
-                                                            ? " active ms-0 nav-item nav-link"
-                                                            : " ms-0 nav-item nav-link"
+                                                        activeTab === '1'
+                                                            ? ' active ms-0 nav-item nav-link'
+                                                            : ' ms-0 nav-item nav-link'
                                                     }
                                                     onClick={() => {
-                                                        toggle("1");
+                                                        toggle('1');
                                                     }}
-
                                                 >
                                                     Description
                                                 </NavLink>
@@ -262,10 +251,12 @@ function ProductSingle() {
                                             <NavItem>
                                                 <NavLink
                                                     className={
-                                                        activeTab === "2" ? "active nav-item nav-link" : "nav-item nav-link"
+                                                        activeTab === '2'
+                                                            ? 'active nav-item nav-link'
+                                                            : 'nav-item nav-link'
                                                     }
                                                     onClick={() => {
-                                                        toggle("2");
+                                                        toggle('2');
                                                     }}
                                                 >
                                                     Additional Information
@@ -274,10 +265,12 @@ function ProductSingle() {
                                             <NavItem>
                                                 <NavLink
                                                     className={
-                                                        activeTab === "3" ? "active  nav-item nav-link" : " nav-item nav-link"
+                                                        activeTab === '3'
+                                                            ? 'active  nav-item nav-link'
+                                                            : ' nav-item nav-link'
                                                     }
                                                     onClick={() => {
-                                                        toggle("3");
+                                                        toggle('3');
                                                     }}
                                                 >
                                                     Reviews (3)
@@ -295,11 +288,11 @@ function ProductSingle() {
                                                     <tbody>
                                                         <tr>
                                                             <td>Size</td>
-                                                            <td>{product.size.join(" ")}</td>
+                                                            <td>{product.size.join(' ')}</td>
                                                         </tr>
                                                         <tr>
                                                             <td>Color</td>
-                                                            <td>{product.colors.join(" ")}</td>
+                                                            <td>{product.colors.join(' ')}</td>
                                                         </tr>
                                                         <tr>
                                                             <td>Chest</td>

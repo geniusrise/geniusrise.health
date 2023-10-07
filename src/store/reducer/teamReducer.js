@@ -1,16 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
-import teamMembers from "../../api/team";
+import { createSlice } from '@reduxjs/toolkit';
+import teamMembers from '../../api/team';
 const teamSlice = createSlice({
-  name: "team",
-  initialState: {
-    teamMembers: teamMembers,
-    selectedTeamMember: "",
-  },
-  reducers: {
-    setSelectedTeamMember(state, action) {
-      state.selectedTeamMember = action.payload;
+    name: 'team',
+    initialState: {
+        teamMembers: teamMembers,
+        selectedTeamMember: '',
     },
-  },
+    reducers: {
+        setSelectedTeamMember(state, action) {
+            state.selectedTeamMember = action.payload;
+        },
+    },
 });
 
 export const { setSelectedTeamMember } = teamSlice.actions;

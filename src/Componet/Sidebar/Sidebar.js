@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Button } from "reactstrap";
-import { useDispatch, useSelector } from "react-redux";
-import {
-    setFilters,
-    filterProducts,
-    resetFilters,
-} from "../../store/reducer/productReducer";
+import React, { useState, useEffect } from 'react';
+import { Button } from 'reactstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFilters, filterProducts, resetFilters } from '../../store/reducer/productReducer';
 // import Slider  from "reactstrap";
-import { Range } from 'react-range'
+import { Range } from 'react-range';
 
 function SideBar() {
     const dispatch = useDispatch();
@@ -46,9 +42,7 @@ function SideBar() {
     const handleCategoryClick = (category) => {
         const index = filters.category.indexOf(category);
         if (index === -1) {
-            dispatch(
-                setFilters({ ...filters, category: [...filters.category, category] })
-            );
+            dispatch(setFilters({ ...filters, category: [...filters.category, category] }));
         } else {
             const updatedCategories = [...filters.category];
             updatedCategories.splice(index, 1);
@@ -70,14 +64,14 @@ function SideBar() {
     };
     useEffect(() => {
         dispatch(filterProducts());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filters]);
 
     return (
         <div>
             <div className="pb-4 mb-4 mb-4 border-bottom border-light">
                 <Button
-                    style={{ width: "65px", height: "30px" }}
+                    style={{ width: '65px', height: '30px' }}
                     onClick={() => {
                         dispatch(resetFilters());
                     }}
@@ -95,9 +89,7 @@ function SideBar() {
                             type="checkbox"
                             className="form-check-input"
                             value={category}
-                            defaultChecked={
-                                filters.category.includes(category) ? true : false
-                            }
+                            defaultChecked={filters.category.includes(category) ? true : false}
                             onClick={() => handleCategoryClick(category)}
                         />
                         <label className="form-check-label" key={category}>
@@ -151,17 +143,16 @@ function SideBar() {
                         )}
                     />
                 </div>
-
             </div>
             <div className="z-index-1 mb-4 p-4 rounded" style={{ backgroundColor: '#fff5d9' }}>
                 <h4 className="mb-3">Color</h4>
                 <ul
                     className="list-inline"
                     style={{
-                        display: "grid",
-                        justifyContent: "center",
-                        gridTemplateColumns: "repeat(auto-fill, minmax(40px, 1fr))",
-                        gridGap: "10px",
+                        display: 'grid',
+                        justifyContent: 'center',
+                        gridTemplateColumns: 'repeat(auto-fill, minmax(40px, 1fr))',
+                        gridGap: '10px',
                     }}
                 >
                     {colors.map((color) => (
@@ -174,14 +165,14 @@ function SideBar() {
                                     id={color}
                                     style={{
                                         background: color,
-                                        width: "26px",
-                                        height: "26px",
+                                        width: '26px',
+                                        height: '26px',
                                         border:
                                             filters.colors === color
-                                                ? "4px solid blue" // Use red border if filters.colors matches with color
-                                                : "", // Use default gray border otherwise
-                                        paddingLeft: "2px",
-                                        borderRadius: "0px",
+                                                ? '4px solid blue' // Use red border if filters.colors matches with color
+                                                : '', // Use default gray border otherwise
+                                        paddingLeft: '2px',
+                                        borderRadius: '0px',
                                     }}
                                     checked={filters.colors === color}
                                     onChange={() => handleColorClick(color)}
@@ -197,34 +188,34 @@ function SideBar() {
                 <div
                     className="pl-0"
                     style={{
-                        display: "grid",
-                        justifyContent: "center",
+                        display: 'grid',
+                        justifyContent: 'center',
                         // height: "40px",
-                        gridTemplateColumns: "repeat(5, 1fr)", // show 4 items in one row
+                        gridTemplateColumns: 'repeat(5, 1fr)', // show 4 items in one row
 
                         //gridAutoFlow: "column",
-                        paddingBottom: "5px",
-                        gap: "5px",
+                        paddingBottom: '5px',
+                        gap: '5px',
                     }}
                 >
                     {sizes.map((size, index) => (
                         <li key={index}>
                             <input
                                 name="size"
-                                id={size.toLowerCase() + "-size"}
+                                id={size.toLowerCase() + '-size'}
                                 type="radio"
                                 className="form-check-input"
                                 checked={filters.size === size}
-                                style={{ display: "none" }}
+                                style={{ display: 'none' }}
                                 onChange={() => handleSizeClick(size)}
                             />
                             <label
-                                htmlFor={size.toLowerCase() + "-size"}
+                                htmlFor={size.toLowerCase() + '-size'}
                                 style={{
-                                    border: "2px solid #ddd",
-                                    borderRadius: "5px",
+                                    border: '2px solid #ddd',
+                                    borderRadius: '5px',
                                     //padding: "5px 15px",
-                                    cursor: "pointer",
+                                    cursor: 'pointer',
                                 }}
                             >
                                 {size}
@@ -233,7 +224,7 @@ function SideBar() {
                     ))}
                 </div>
             </div>
-        </div >
+        </div>
     );
 }
 

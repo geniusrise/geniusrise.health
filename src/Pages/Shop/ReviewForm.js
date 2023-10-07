@@ -14,7 +14,7 @@ function ReviewForm() {
     };
 
     return (
-        <div className="post-comments mt-5 pos-r bg-white rounded p-4" style={{backgroundColor: 'white'}}>
+        <div className="post-comments mt-5 pos-r bg-white rounded p-4" style={{ backgroundColor: 'white' }}>
             <div className="section-title mb-3">
                 <h5>Add REVIEW</h5>
             </div>

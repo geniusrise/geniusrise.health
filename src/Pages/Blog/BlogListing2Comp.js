@@ -6,7 +6,7 @@ import { setSelectedBlog } from '../../store/reducer/blogReducer';
 
 const BlogListing2Comp = () => {
     const blogs = useSelector((state) => state.blog.blogItems);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const [activePage, setActivePage] = useState(1);
     const pageSize = 3;
 
@@ -23,7 +23,7 @@ const BlogListing2Comp = () => {
             <section>
                 <div className="container">
                     <div className="row">
-                    <div className="col-12 col-lg-4 ms-auto">
+                        <div className="col-12 col-lg-4 ms-auto">
                             <form className="my-2 my-lg-0 row g-0">
                                 <input
                                     className="form-control me-sm-2 col"
@@ -35,7 +35,7 @@ const BlogListing2Comp = () => {
                                     Search Blog
                                 </button>
                             </form>
-                            <div className="mt-5 mb-5 p-4 rounded" style={{ backgroundColor: "#d0faec" }}>
+                            <div className="mt-5 mb-5 p-4 rounded" style={{ backgroundColor: '#d0faec' }}>
                                 <h4 className="mb-3">Recent Stories</h4>
                                 {blogs.slice(0, 3).map((post, index) => (
                                     <article key={index}>
@@ -43,13 +43,21 @@ const BlogListing2Comp = () => {
                                             <div className="col-sm-4">
                                                 <img
                                                     className="rounded img-fluid shadow"
-                                                    src={require(`../../assets/images/blog/${post.image.split('/')[3]}`)}
+                                                    src={require(`../../assets/images/blog/${
+                                                        post.image.split('/')[3]
+                                                    }`)}
                                                     alt="Image1"
                                                 />
                                             </div>
                                             <div className="col-sm-8">
                                                 <h5 className="h6">
-                                                    <Link className="link-title"  to="/blog-single" onClick={() => { dispatch(setSelectedBlog(post.id)) }}>
+                                                    <Link
+                                                        className="link-title"
+                                                        to="/blog-single"
+                                                        onClick={() => {
+                                                            dispatch(setSelectedBlog(post.id));
+                                                        }}
+                                                    >
                                                         {post.title}
                                                     </Link>
                                                 </h5>
@@ -61,105 +69,156 @@ const BlogListing2Comp = () => {
                                     </article>
                                 ))}
                             </div>
-                            <div className="mb-5 p-4 rounded" style={{ backgroundColor: "#ffeff8" }}>
+                            <div className="mb-5 p-4 rounded" style={{ backgroundColor: '#ffeff8' }}>
                                 <h4 className="mb-3">Categories</h4>
                                 <ul class="list-unstyled list-group list-group-flush">
-                                    <li class="mb-3"> <a class="list-group-item list-group-item-action border-0" href="/">
-                                        All
-                                        <span class="badge bg-primary font-weight-normal p-2 rounded float-end">74</span>
-                                    </a>
+                                    <li class="mb-3">
+                                        {' '}
+                                        <a class="list-group-item list-group-item-action border-0" href="/">
+                                            All
+                                            <span class="badge bg-primary font-weight-normal p-2 rounded float-end">
+                                                74
+                                            </span>
+                                        </a>
                                     </li>
-                                    <li class="mb-3"> <a class="list-group-item list-group-item-action border-0" href="/">
-                                        Arts and Entertainment
-                                        <span class="badge bg-primary font-weight-normal p-2 rounded float-end">23</span>
-                                    </a>
+                                    <li class="mb-3">
+                                        {' '}
+                                        <a class="list-group-item list-group-item-action border-0" href="/">
+                                            Arts and Entertainment
+                                            <span class="badge bg-primary font-weight-normal p-2 rounded float-end">
+                                                23
+                                            </span>
+                                        </a>
                                     </li>
-                                    <li class="mb-3"> <a class="list-group-item list-group-item-action border-0" href="/">
-                                        Featured
-                                        <span class="badge bg-primary font-weight-normal p-2 rounded float-end">14</span>
-                                    </a>
+                                    <li class="mb-3">
+                                        {' '}
+                                        <a class="list-group-item list-group-item-action border-0" href="/">
+                                            Featured
+                                            <span class="badge bg-primary font-weight-normal p-2 rounded float-end">
+                                                14
+                                            </span>
+                                        </a>
                                     </li>
-                                    <li class="mb-3"> <a class="list-group-item list-group-item-action border-0" href="/">
-                                        Daily news
-                                        <span class="badge bg-primary font-weight-normal p-2 rounded float-end">48</span>
-                                    </a>
+                                    <li class="mb-3">
+                                        {' '}
+                                        <a class="list-group-item list-group-item-action border-0" href="/">
+                                            Daily news
+                                            <span class="badge bg-primary font-weight-normal p-2 rounded float-end">
+                                                48
+                                            </span>
+                                        </a>
                                     </li>
-                                    <li> <a class="list-group-item list-group-item-action border-0" href="/">
-                                        Blog Post
-                                        <span class="badge bg-primary font-weight-normal p-2 rounded float-end">32</span>
-                                    </a>
+                                    <li>
+                                        {' '}
+                                        <a class="list-group-item list-group-item-action border-0" href="/">
+                                            Blog Post
+                                            <span class="badge bg-primary font-weight-normal p-2 rounded float-end">
+                                                32
+                                            </span>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
-                            <div className="p-4 rounded" style={{ backgroundColor: "#d3f6fe" }}>
+                            <div className="p-4 rounded" style={{ backgroundColor: '#d3f6fe' }}>
                                 <h4 className="mb-3">Tags</h4>
-                                <div> <a class="btn-link rounded d-inline-block p-2 bg-white m-1" href="/">geniusrise.health</a>
-                                    <a class="btn-link rounded d-inline-block p-2 bg-white m-1" href="/">Web Design</a>
-                                    <a class="btn-link rounded d-inline-block p-2 bg-white m-1" href="/">Saas</a>
-                                    <a class="btn-link rounded d-inline-block p-2 bg-white m-1" href="/">Corporate</a>
-                                    <a class="btn-link rounded d-inline-block p-2 bg-white m-1" href="/">Sass</a>
-                                    <a class="btn-link rounded d-inline-block p-2 bg-white m-1" href="/">Software</a>
-                                    <a class="btn-link rounded d-inline-block p-2 bg-white m-1" href="/">Landing</a>
-                                    <a class="btn-link rounded d-inline-block p-2 bg-white m-1" href="/">Startup</a>
+                                <div>
+                                    {' '}
+                                    <a class="btn-link rounded d-inline-block p-2 bg-white m-1" href="/">
+                                        geniusrise.health
+                                    </a>
+                                    <a class="btn-link rounded d-inline-block p-2 bg-white m-1" href="/">
+                                        Web Design
+                                    </a>
+                                    <a class="btn-link rounded d-inline-block p-2 bg-white m-1" href="/">
+                                        Saas
+                                    </a>
+                                    <a class="btn-link rounded d-inline-block p-2 bg-white m-1" href="/">
+                                        Corporate
+                                    </a>
+                                    <a class="btn-link rounded d-inline-block p-2 bg-white m-1" href="/">
+                                        Sass
+                                    </a>
+                                    <a class="btn-link rounded d-inline-block p-2 bg-white m-1" href="/">
+                                        Software
+                                    </a>
+                                    <a class="btn-link rounded d-inline-block p-2 bg-white m-1" href="/">
+                                        Landing
+                                    </a>
+                                    <a class="btn-link rounded d-inline-block p-2 bg-white m-1" href="/">
+                                        Startup
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-12 col-lg-7 mb-6 mb-lg-0 ms-auto" >
+                        <div className="col-12 col-lg-7 mb-6 mb-lg-0 ms-auto">
                             {blogsToShow.map((post, index) => (
                                 <div key={index}>
-                                <div className="card border-0 shadow bg-transparent">
-                                    <img
-                                        className="card-img-top"
-                                        src={require(`../../assets/images/blog/${post.image.split('/')[3]}`)}
-                                        alt="Image1"
-                                    />
-                                    <div className="card-body p-4">
-                                        <div>
-                                            <div className="d-inline-block bg-light text-center px-2 py-1 rounded me-2">
-                                                <span className="text-primary">{post.date}</span>
-                                            </div>{" "}
-                                            <Link className="d-inline-block btn-link" to="/blog-single"  onClick={() => { dispatch(setSelectedBlog(post.id)) }}>
-                                                {post.category}
-                                            </Link>
+                                    <div className="card border-0 shadow bg-transparent">
+                                        <img
+                                            className="card-img-top"
+                                            src={require(`../../assets/images/blog/${post.image.split('/')[3]}`)}
+                                            alt="Image1"
+                                        />
+                                        <div className="card-body p-4">
+                                            <div>
+                                                <div className="d-inline-block bg-light text-center px-2 py-1 rounded me-2">
+                                                    <span className="text-primary">{post.date}</span>
+                                                </div>{' '}
+                                                <Link
+                                                    className="d-inline-block btn-link"
+                                                    to="/blog-single"
+                                                    onClick={() => {
+                                                        dispatch(setSelectedBlog(post.id));
+                                                    }}
+                                                >
+                                                    {post.category}
+                                                </Link>
+                                            </div>
+                                            <h2 className="h5 my-3">
+                                                <Link
+                                                    className="link-title"
+                                                    to="/blog-single"
+                                                    onClick={() => {
+                                                        dispatch(setSelectedBlog(post.id));
+                                                    }}
+                                                >
+                                                    {post.title}
+                                                </Link>
+                                            </h2>
+                                            <ul className="list-inline mb-0">
+                                                <li className="list-inline-item pe-3">
+                                                    {' '}
+                                                    <a href="/" className="list-group-item-action">
+                                                        <i className="lar la-user-circle me-1 text-primary ic-1x" />{' '}
+                                                        {post.author}
+                                                    </a>
+                                                </li>
+                                                <li className="list-inline-item pe-3">
+                                                    {' '}
+                                                    <a href="/" className="list-group-item-action">
+                                                        <i className="las la-eye me-1 text-primary ic-1x" />{' '}
+                                                        {post.views}
+                                                    </a>
+                                                </li>
+                                                <li className="list-inline-item">
+                                                    {' '}
+                                                    <a href="/" className="list-group-item-action">
+                                                        <i className="lar la-comments me-1 text-primary ic-1x" />{' '}
+                                                        {post.comments}
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </div>
-                                        <h2 className="h5 my-3">
-                                            <Link className="link-title"  to="/blog-single" onClick={() => { dispatch(setSelectedBlog(post.id)) }}>
-                                                {post.title}
-                                            </Link>
-                                        </h2>
-                                        <ul className="list-inline mb-0">
-                                            <li className="list-inline-item pe-3">
-                                                {" "}
-                                                <a href="/" className="list-group-item-action">
-                                                    <i className="lar la-user-circle me-1 text-primary ic-1x" /> {post.author}
-                                                </a>
-                                            </li>
-                                            <li className="list-inline-item pe-3">
-                                                {" "}
-                                                <a href="/" className="list-group-item-action">
-                                                    <i className="las la-eye me-1 text-primary ic-1x" /> {post.views}
-                                                </a>
-                                            </li>
-                                            <li className="list-inline-item">
-                                                {" "}
-                                                <a href="/" className="list-group-item-action">
-                                                    <i className="lar la-comments me-1 text-primary ic-1x" /> {post.comments}
-                                                </a>
-                                            </li>
-                                        </ul>
                                     </div>
-
-                                </div>
-                                <hr className='my-5'/>
+                                    <hr className="my-5" />
                                 </div>
                             ))}
                             <ProductPagination
-                                    activePage={activePage}
-                                    totalPages={totalPages}
-                                    onPageChange={handlePageChange}
-                                />
+                                activePage={activePage}
+                                totalPages={totalPages}
+                                onPageChange={handlePageChange}
+                            />
                         </div>
-
                     </div>
                 </div>
             </section>

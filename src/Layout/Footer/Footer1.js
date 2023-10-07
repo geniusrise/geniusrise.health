@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Footer1() {
-    const [Visible, setVisible] = useState(false)
+    const [Visible, setVisible] = useState(false);
     const [loader, setLoader] = useState(true);
     const handleScroll = () => {
-        var scrollTop =
-            (document.documentElement && document.documentElement.scrollTop) ||
-            document.body.scrollTop;
+        var scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
         if (scrollTop > 100) {
             setVisible(true);
         } else {
@@ -27,39 +25,53 @@ function Footer1() {
         }
     }, [loader]);
     const gototop = () => {
-        window.scrollTo({ top: 0, behavior: "smooth" })
-    }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
     return (
         <>
             <footer>
                 <div className="container">
                     <div className="row">
                         <div className="col-12 col-lg-5 col-xl-4 me-auto mb-5 mb-lg-0">
-                            <Link
-                                className="footer-logo h2 text-primary mb-0 font-w-7"
-                                to="/"
-                            >
+                            <Link className="footer-logo h2 text-primary mb-0 font-w-7" to="/">
                                 Geniusrise<span className="text-dark font-w-4"> Health.</span>
                             </Link>
                             <p className="my-3">
-                                geniusrise.health - clinical AI assistants for hospitals, clinics and healthcare practices.
+                                geniusrise.health - clinical AI assistants for hospitals, clinics and healthcare
+                                practices.
                             </p>
                             <ul className="list-inline">
                                 <li className="list-inline-item">
-                                    <Link className="border rounded px-2 py-1 text-dark" to="https://github.com/geniusrise"
-                                    ><i className="la la-github"></i></Link>
+                                    <Link
+                                        className="border rounded px-2 py-1 text-dark"
+                                        to="https://github.com/geniusrise"
+                                    >
+                                        <i className="la la-github"></i>
+                                    </Link>
                                 </li>
                                 <li className="list-inline-item">
-                                    <Link className="border rounded px-2 py-1 text-dark" to="https://twitter.com/genius_rise"
-                                    ><i className="la la-twitter"></i></Link>
+                                    <Link
+                                        className="border rounded px-2 py-1 text-dark"
+                                        to="https://twitter.com/genius_rise"
+                                    >
+                                        <i className="la la-twitter"></i>
+                                    </Link>
                                 </li>
                                 <li className="list-inline-item">
-                                    <Link className="border rounded px-2 py-1 text-dark" to="https://www.linkedin.com/company/geniusrise/"
-                                    ><i className="la la-linkedin"></i></Link>
+                                    <Link
+                                        className="border rounded px-2 py-1 text-dark"
+                                        to="https://www.linkedin.com/company/geniusrise/"
+                                    >
+                                        <i className="la la-linkedin"></i>
+                                    </Link>
                                 </li>
                                 <li className="list-inline-item">
-                                    <Link className="border rounded px-2 py-1 text-dark" to="https://huggingface.co/geniusrise"
-                                    ><i className="la la-facebook"></i></Link>
+                                    <Link
+                                        className="border rounded px-2 py-1 text-dark"
+                                        to="https://huggingface.co/geniusrise"
+                                    >
+                                        <i className="la la-facebook"></i>
+                                    </Link>
                                 </li>
                             </ul>
                         </div>
@@ -69,16 +81,22 @@ function Footer1() {
                                     <h5 className="mb-4">Pages</h5>
                                     <ul className="list-unstyled mb-0">
                                         <li className="mb-3">
-                                            <Link className="list-group-item-action" to="https://geniusrise.ai"
-                                            >Geniusrise</Link>
+                                            <Link className="list-group-item-action" to="https://geniusrise.ai">
+                                                Geniusrise
+                                            </Link>
                                         </li>
                                         <li className="mb-3">
-                                            <Link className="list-group-item-action" to="https://github.com/geniusrise"
-                                            >Github</Link>
+                                            <Link className="list-group-item-action" to="https://github.com/geniusrise">
+                                                Github
+                                            </Link>
                                         </li>
                                         <li>
-                                            <Link className="list-group-item-action" to="https://huggingface.co/geniusrise"
-                                            >Huggingface</Link>
+                                            <Link
+                                                className="list-group-item-action"
+                                                to="https://huggingface.co/geniusrise"
+                                            >
+                                                Huggingface
+                                            </Link>
                                         </li>
                                     </ul>
                                 </div>
@@ -86,13 +104,14 @@ function Footer1() {
                                     <h5 className="mb-4">Our Address</h5>
                                     <div className="mb-3">
                                         <p className="mb-0 text-dark">
-                                            Cinnabar Hills, Embassy Golf Links Business Park
-                                            Challaghatta, Bengaluru, Karnataka 560071, India
+                                            Cinnabar Hills, Embassy Golf Links Business Park Challaghatta, Bengaluru,
+                                            Karnataka 560071, India
                                         </p>
                                     </div>
                                     <div className="mb-3">
                                         <Link className="btn-link text-dark" to="mailto:hello@geniusrise.ai">
-                                            hello@geniusrise.ai</Link>
+                                            hello@geniusrise.ai
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +126,12 @@ function Footer1() {
                         <div className="col-md-6">
                             Copyright ©2023 All rights reserved | geniusrise.health is made by<span> </span>
                             <i className="lar la-heart text-primary heartBeat2"> </i>
-                            <u><Link className="text-primary" to="https://geniusrise.ai"> geniusrise.ai</Link></u>
+                            <u>
+                                <Link className="text-primary" to="https://geniusrise.ai">
+                                    {' '}
+                                    geniusrise.ai
+                                </Link>
+                            </u>
                         </div>
                         <div className="col-md-6 text-md-end mt-3 mt-md-0">
                             <ul className="list-inline mb-0">
@@ -126,11 +150,13 @@ function Footer1() {
                     </div>
                 </div>
             </footer>
-            <div className={`${Visible ? 'scroll-top' : ''}`} >
-                <div class="smoothscroll" onClick={gototop}>Scroll Top</div>
+            <div className={`${Visible ? 'scroll-top' : ''}`}>
+                <div class="smoothscroll" onClick={gototop}>
+                    Scroll Top
+                </div>
             </div>
         </>
-    )
+    );
 }
 
-export default Footer1
+export default Footer1;

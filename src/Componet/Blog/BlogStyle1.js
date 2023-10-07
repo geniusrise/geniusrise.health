@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { setSelectedBlog } from '../../store/reducer/blogReducer';
 const BlogStyle1 = () => {
     const blogs = useSelector((state) => state.blog.blogItems);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     return (
         <section>
@@ -29,7 +29,7 @@ const BlogStyle1 = () => {
                     </div>
                 </div>
                 <div className="row">
-                    {blogs.slice(0,3).map((blog) => (
+                    {blogs.slice(0, 3).map((blog) => (
                         <div className="col-md-6 col-lg-4 mb-5 mb-lg-0" key={blog.id}>
                             <div className="card border-0 shadow bg-transparent">
                                 <img
@@ -43,19 +43,32 @@ const BlogStyle1 = () => {
                                         <div className="d-inline-block bg-light text-center px-2 py-1 rounded me-2">
                                             <span className="text-primary">{blog.date}</span>
                                         </div>
-                                        <Link to="/blog-single" onClick={() => { dispatch(setSelectedBlog(blog.id)) }} className="d-inline-block btn-link">
+                                        <Link
+                                            to="/blog-single"
+                                            onClick={() => {
+                                                dispatch(setSelectedBlog(blog.id));
+                                            }}
+                                            className="d-inline-block btn-link"
+                                        >
                                             {blog.category}
                                         </Link>
                                     </div>
                                     <h2 className="h5 my-3">
-                                        <Link to="/blog-single" className="link-title" onClick={() => { dispatch(setSelectedBlog(blog.id)) }} >
+                                        <Link
+                                            to="/blog-single"
+                                            className="link-title"
+                                            onClick={() => {
+                                                dispatch(setSelectedBlog(blog.id));
+                                            }}
+                                        >
                                             {blog.title}
                                         </Link>
                                     </h2>
                                     <ul className="list-inline mb-0">
                                         <li className="list-inline-item pe-3">
                                             <Link to="/" className="list-group-item-action">
-                                                <i className="lar la-user-circle me-1 text-primary ic-1x"></i> {blog.author}
+                                                <i className="lar la-user-circle me-1 text-primary ic-1x"></i>{' '}
+                                                {blog.author}
                                             </Link>
                                         </li>
                                         <li className="list-inline-item pe-3">
@@ -65,7 +78,8 @@ const BlogStyle1 = () => {
                                         </li>
                                         <li className="list-inline-item">
                                             <Link to="/" className="list-group-item-action">
-                                                <i className="lar la-comments me-1 text-primary ic-1x"></i> {blog.comments}
+                                                <i className="lar la-comments me-1 text-primary ic-1x"></i>{' '}
+                                                {blog.comments}
                                             </Link>
                                         </li>
                                     </ul>

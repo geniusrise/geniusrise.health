@@ -1,10 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
-import caseStudies from "../../api/caseStudies";
+import { createSlice } from '@reduxjs/toolkit';
+import caseStudies from '../../api/caseStudies';
 const caseStudiesSlice = createSlice({
-    name: "case",
+    name: 'case',
     initialState: {
         caseStudyItems: caseStudies,
-        selectedCaseStudy: "",
+        selectedCaseStudy: '',
     },
     reducers: {
         setSelectedCaseStudies(state, action) {

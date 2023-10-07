@@ -11,7 +11,7 @@ function RatingList() {
         <div className="row total-rating">
             <div className="col-md-6">
                 <div className="bg-dark shadow-sm rounded text-center p-5">
-                    <h5 className='text-white'>Overall</h5>
+                    <h5 className="text-white">Overall</h5>
                     <h4 class="text-white">4.0</h4>
                     <h6 class="text-white">(03 Reviews)</h6>
                 </div>

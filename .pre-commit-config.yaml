@@ -1,0 +1,35 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.1.0
+    hooks:
+      - id: check-json
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v2.6.2
+    hooks:
+      - id: prettier
+        args:
+          - --print-width=120
+          - --prose-wrap=always
+          - --tab-width=4
+          - --single-quote=true
+          - --no-bracket-spacing=true
+          - --trailing-comma=es5
+        files: '\.(js|jsx|ts|tsx|html|css)$'
+        additional_dependencies:
+          - 'prettier@2.6.2'
+
+  # ESLint: Linting for JS and TS
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: 'v8.7.0' # Use the latest version from https://github.com/eslint/eslint/releases
+    hooks:
+      - id: eslint
+        files: '\.(js|jsx|ts|tsx)$'
+        # Ensure you have a proper .eslintrc.js or equivalent config file
+        # Add any other ESLint options or plugins you want
+        args: ['--fix']
+
+exclude: ^(build|static)/

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 function Form() {
     return (
@@ -8,11 +8,16 @@ function Form() {
                     <div className="row mb-5 align-items-end">
                         <div className="col-lg-5 col-12">
                             <div>
-                                <h2 className="mb-lg-0"><span className="font-w-4 d-block">Submit your</span> job application</h2>
+                                <h2 className="mb-lg-0">
+                                    <span className="font-w-4 d-block">Submit your</span> job application
+                                </h2>
                             </div>
                         </div>
                         <div className="col-lg-7 col-12">
-                            <p className="lead mb-0">We use the latest technologies it voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                            <p className="lead mb-0">
+                                We use the latest technologies it voluptatem accusantium doloremque laudantium, totam
+                                rem aperiam.
+                            </p>
                         </div>
                     </div>
                     <div className="row">
@@ -22,13 +27,29 @@ function Form() {
                                 <div className="row">
                                     <div className="col-md-6">
                                         <div className="form-group">
-                                            <input id="form_name" type="text" name="name" className="form-control" placeholder="First name" required="required" data-error="Firstname is required." />
+                                            <input
+                                                id="form_name"
+                                                type="text"
+                                                name="name"
+                                                className="form-control"
+                                                placeholder="First name"
+                                                required="required"
+                                                data-error="Firstname is required."
+                                            />
                                             <div className="help-block with-errors" />
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-group">
-                                            <input id="form_lastname" type="text" name="surname" className="form-control" placeholder="Last name" required="required" data-error="Lastname is required." />
+                                            <input
+                                                id="form_lastname"
+                                                type="text"
+                                                name="surname"
+                                                className="form-control"
+                                                placeholder="Last name"
+                                                required="required"
+                                                data-error="Lastname is required."
+                                            />
                                             <div className="help-block with-errors" />
                                         </div>
                                     </div>
@@ -36,20 +57,40 @@ function Form() {
                                 <div className="row">
                                     <div className="col-md-6">
                                         <div className="form-group">
-                                            <input id="form_email" type="email" name="email" className="form-control" placeholder="Email" required="required" data-error="Valid email is required." />
+                                            <input
+                                                id="form_email"
+                                                type="email"
+                                                name="email"
+                                                className="form-control"
+                                                placeholder="Email"
+                                                required="required"
+                                                data-error="Valid email is required."
+                                            />
                                             <div className="help-block with-errors" />
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-group">
-                                            <input id="form_age" type="tel" name="age" className="form-control" placeholder="Age" />
+                                            <input
+                                                id="form_age"
+                                                type="tel"
+                                                name="age"
+                                                className="form-control"
+                                                placeholder="Age"
+                                            />
                                         </div>
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="col-md-6">
                                         <div className="form-group">
-                                            <input id="form_city" type="text" name="name" className="form-control" placeholder="City" />
+                                            <input
+                                                id="form_city"
+                                                type="text"
+                                                name="name"
+                                                className="form-control"
+                                                placeholder="City"
+                                            />
                                         </div>
                                     </div>
                                     <div className="col-md-6">
@@ -67,7 +108,13 @@ function Form() {
                                 <div className="row">
                                     <div className="col-md-6">
                                         <div className="form-group">
-                                            <input id="phone" type="text" name="Phone Number" className="form-control" placeholder="Phone Number" />
+                                            <input
+                                                id="phone"
+                                                type="text"
+                                                name="Phone Number"
+                                                className="form-control"
+                                                placeholder="Phone Number"
+                                            />
                                         </div>
                                     </div>
                                     <div className="col-md-6">
@@ -83,12 +130,28 @@ function Form() {
                                 <div className="row">
                                     <div className="col-md-6">
                                         <div className="form-group">
-                                            <textarea id="form_experience" name="Experience If any" className="form-control" placeholder="Experience If any" rows={4} defaultValue={""} />
+                                            <textarea
+                                                id="form_experience"
+                                                name="Experience If any"
+                                                className="form-control"
+                                                placeholder="Experience If any"
+                                                rows={4}
+                                                defaultValue={''}
+                                            />
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-group">
-                                            <textarea id="form_message" name="Application " className="form-control" placeholder="Application " rows={4} required="required" data-error="Please,leave us a message." defaultValue={""} />
+                                            <textarea
+                                                id="form_message"
+                                                name="Application "
+                                                className="form-control"
+                                                placeholder="Application "
+                                                rows={4}
+                                                required="required"
+                                                data-error="Please,leave us a message."
+                                                defaultValue={''}
+                                            />
                                             <div className="help-block with-errors" />
                                         </div>
                                     </div>
@@ -103,9 +166,8 @@ function Form() {
                     </div>
                 </div>
             </section>
-
         </>
-    )
+    );
 }
 
-export default Form
+export default Form;

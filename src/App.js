@@ -1,21 +1,21 @@
-import React, { useEffect } from 'react'
-import "./Vender"
+import React, { useEffect } from 'react';
+import './Vender';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'bulma/css/bulma.min.css';
 import $ from 'jquery';
-import { Route, Routes, useLocation, Outlet } from 'react-router-dom'
-import Landing1 from './Pages/Home/Landing1/Landing1'
-import Landing2 from './Pages/Home/Landing2/Landing2'
-import Landing3 from './Pages/Home/Landing3/Landing3'
-import Landing4 from './Pages/Home/Landing4/Langing4'
-import Header1 from './Layout/Header/Header1'
-import Footer1 from './Layout/Footer/Footer1'
-import HomePage from './defaultPages/HomePage'
-import Login from './defaultPages/Login/Login'
-import Signup from './defaultPages/Signup/Signup'
-import AboutUs from './Pages/Company/AboutUs'
-import ProductGrid from './Pages/Shop/ProductGrid'
+import { Route, Routes, useLocation, Outlet } from 'react-router-dom';
+import Landing1 from './Pages/Home/Landing1/Landing1';
+import Landing2 from './Pages/Home/Landing2/Landing2';
+import Landing3 from './Pages/Home/Landing3/Landing3';
+import Landing4 from './Pages/Home/Landing4/Langing4';
+import Header1 from './Layout/Header/Header1';
+import Footer1 from './Layout/Footer/Footer1';
+import HomePage from './defaultPages/HomePage';
+import Login from './defaultPages/Login/Login';
+import Signup from './defaultPages/Signup/Signup';
+import AboutUs from './Pages/Company/AboutUs';
+import ProductGrid from './Pages/Shop/ProductGrid';
 import ProductList from './Pages/Shop/ProductList';
 import ProductSingle from './Pages/Shop/ProductSingle';
 import ProductCart from './Pages/Shop/ProductCart';
@@ -50,97 +50,97 @@ import Error404 from './Pages/Utilities/Error404.js';
 import Error404WithoutHeaderFooter from './Componet/NotDefinedPage';
 
 function App() {
-  const location = useLocation();
-  const getUrl = (pathname) => {
-    let pathArray = pathname.split('/');
-    return `/${pathArray[1]}` === '/coming_soon'
-      ? true
-      : `/${pathArray[1]}` === '/maintenance'
-        ? true
-        : `/${pathArray[1]}` === '/error_404'
-          ? true
-          : `/${pathArray[1]}` === '*'
+    const location = useLocation();
+    const getUrl = (pathname) => {
+        let pathArray = pathname.split('/');
+        return `/${pathArray[1]}` === '/coming_soon'
+            ? true
+            : `/${pathArray[1]}` === '/maintenance'
+            ? true
+            : `/${pathArray[1]}` === '/error_404'
+            ? true
+            : `/${pathArray[1]}` === '*'
             ? true
             : false;
-  };
+    };
 
-  const setHeader = (pathname) => {
-    let pathArray = pathname.split('/');
-    return `/${pathArray[1]}` === '/index4' ? true : false;
-  }
+    const setHeader = (pathname) => {
+        let pathArray = pathname.split('/');
+        return `/${pathArray[1]}` === '/index4' ? true : false;
+    };
 
-  const setFooter = (pathname) => {
-    let pathArray = pathname.split('/');
-    return `/${pathArray[1]}` === '/index10' ? false : true;
-  };
-  const scrollbarStyle = `
+    const setFooter = (pathname) => {
+        let pathArray = pathname.split('/');
+        return `/${pathArray[1]}` === '/index10' ? false : true;
+    };
+    const scrollbarStyle = `
   ::-webkit-scrollbar {
     display: none;
   }`;
 
-  useEffect(() => {
-    const handlePopstate = () => {
-      window.location.reload(); // Refresh the page on popstate event (back button)
-    };
+    useEffect(() => {
+        const handlePopstate = () => {
+            window.location.reload(); // Refresh the page on popstate event (back button)
+        };
 
-    window.addEventListener("popstate", handlePopstate);
+        window.addEventListener('popstate', handlePopstate);
 
-    return () => {
-      window.removeEventListener("popstate", handlePopstate);
-    };
-  }, []);
+        return () => {
+            window.removeEventListener('popstate', handlePopstate);
+        };
+    }, []);
 
-  useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to the top when the component mounts
-  }, [location.pathname]);
-  return (
-    <>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
+    useEffect(() => {
+        window.scrollTo(0, 0); // Scroll to the top when the component mounts
+    }, [location.pathname]);
+    return (
+        <>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
 
-      {getUrl(location.pathname) ?
-        <Routes>
-          <Route path="/coming_soon" element={<ComingSoon />} />
-          <Route path="/error_404" element={<Error404 />} />
-          <Route path="/maintenance" element={<Maintenance />} />
-          <Route path="*" element={<Outlet />}>
-            {/* Render the Error404 component without Header and Footer */}
-            <Route index element={<Error404WithoutHeaderFooter />} />
-          </Route>
-        </Routes> :
-
-        <div className="page-wrapper">
-          {setHeader(location.pathname) ? <Header2 /> : <Header1 />}
-          <Routes>
-            {/* difaultHompage */}
-            <Route path='/' element={<HomePage />} />
-            {/* <Route path='/Login' element={<Login />} />
+            {getUrl(location.pathname) ? (
+                <Routes>
+                    <Route path="/coming_soon" element={<ComingSoon />} />
+                    <Route path="/error_404" element={<Error404 />} />
+                    <Route path="/maintenance" element={<Maintenance />} />
+                    <Route path="*" element={<Outlet />}>
+                        {/* Render the Error404 component without Header and Footer */}
+                        <Route index element={<Error404WithoutHeaderFooter />} />
+                    </Route>
+                </Routes>
+            ) : (
+                <div className="page-wrapper">
+                    {setHeader(location.pathname) ? <Header2 /> : <Header1 />}
+                    <Routes>
+                        {/* difaultHompage */}
+                        <Route path="/" element={<HomePage />} />
+                        {/* <Route path='/Login' element={<Login />} />
             <Route path='/Signup' element={<Signup />} /> */}
-            {/* difaultHompage */}
+                        {/* difaultHompage */}
 
-            {/* NavbarHome */}
-            {/* <Route path='/' element={<Landing1 />} /> */}
-            {/* <Route path='/index2' element={<Landing2 />} />
+                        {/* NavbarHome */}
+                        {/* <Route path='/' element={<Landing1 />} /> */}
+                        {/* <Route path='/index2' element={<Landing2 />} />
             <Route path='/index3' element={<Landing3 />} />
             <Route path='/index4' element={<Landing4 />} /> */}
 
-            {/* <Route path='/blog_card' element={<BlogStyle />} />
+                        {/* <Route path='/blog_card' element={<BlogStyle />} />
             <Route path='/blog_listing_1' element={<BlogListing1 />} />
             <Route path='/blog_listing_2' element={<BlogListing2 />} />
             <Route path='/blog-single' element={<BlogSingle />} /> */}
 
-            {/* NavbarHome */}
-            {/* <Route path='/about-us' element={<AboutUs />} />
+                        {/* NavbarHome */}
+                        {/* <Route path='/about-us' element={<AboutUs />} />
             <Route path='/about-us2' element={<AboutUs2 />} />
             <Route path='/career' element={<Career />} />
             <Route path='/career-single' element={<CareerSingle />} />
@@ -170,16 +170,15 @@ function App() {
             <Route path='/team' element={<FeatureTeamPage />} />
             <Route path='/testimonial' element={<FeatureTestimonialPage />} />
             <Route path='/blog' element={<FeatureBlogPage />} /> */}
-            <Route path="*" element={<Error404 />} />
+                        <Route path="*" element={<Error404 />} />
 
-            {/* Company */}
-          </Routes>
-          <Footer1 />
-        </div>
-      }
-    </>
-  )
+                        {/* Company */}
+                    </Routes>
+                    <Footer1 />
+                </div>
+            )}
+        </>
+    );
 }
 
-export default App
-
+export default App;

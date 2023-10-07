@@ -46,9 +46,7 @@ const Header2 = () => {
     };
 
     const handleScroll = () => {
-        var scrollTop =
-            (document.documentElement && document.documentElement.scrollTop) ||
-            document.body.scrollTop;
+        var scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
         if (scrollTop > 100) {
             setVisible(true);
         } else {
@@ -65,8 +63,6 @@ const Header2 = () => {
             return () => clearTimeout(timeout);
         }
     }, [loader]);
-
-
 
     return (
         <header id="site-header" className="header">
@@ -91,11 +87,7 @@ const Header2 = () => {
                                     >
                                         <span className="navbar-toggler-icon"></span>
                                     </button>
-                                    <Collapse
-                                        isOpen={isOpen}
-                                        className="collapse navbar-collapse"
-                                        navbar
-                                    >
+                                    <Collapse isOpen={isOpen} className="collapse navbar-collapse" navbar>
                                         <Nav className="me-auto" navbar>
                                             {navLinks.map((navLink, index) =>
                                                 navLink.type && navLink.type === 'subMenu' ? (
@@ -103,30 +95,41 @@ const Header2 = () => {
                                                         <DropdownToggle nav caret>
                                                             {navLink.menu_title}
                                                         </DropdownToggle>
-                                                        <DropdownMenu id={`submenu_${index}`} className='dropdown-menu'>
+                                                        <DropdownMenu id={`submenu_${index}`} className="dropdown-menu">
                                                             {navLink.child_routes &&
                                                                 navLink.child_routes.map((subNavLink, keys) =>
                                                                     subNavLink.type &&
-                                                                        subNavLink.type === 'childsubMenu' ? (
+                                                                    subNavLink.type === 'childsubMenu' ? (
                                                                         <UncontrolledDropdown
                                                                             inNavbar
                                                                             className="dropdown-submenu"
                                                                             key={keys}
                                                                         >
-                                                                            <DropdownToggle tag="a" caret className='dropdown-item dropdown-toggle'>
+                                                                            <DropdownToggle
+                                                                                tag="a"
+                                                                                caret
+                                                                                className="dropdown-item dropdown-toggle"
+                                                                            >
                                                                                 {subNavLink.menu_title}
                                                                             </DropdownToggle>
-                                                                            <DropdownMenu id={`childsubmenu_${keys}`} className='dropdown-menu'>
+                                                                            <DropdownMenu
+                                                                                id={`childsubmenu_${keys}`}
+                                                                                className="dropdown-menu"
+                                                                            >
                                                                                 {subNavLink.child_routes &&
                                                                                     subNavLink.child_routes.map(
                                                                                         (ChildsubNavLink, i) => (
                                                                                             <DropdownItem
                                                                                                 key={i}
                                                                                                 tag={Link}
-                                                                                                to={ChildsubNavLink.path}
+                                                                                                to={
+                                                                                                    ChildsubNavLink.path
+                                                                                                }
                                                                                                 onClick={handleClick}
                                                                                             >
-                                                                                                {ChildsubNavLink.menu_title}
+                                                                                                {
+                                                                                                    ChildsubNavLink.menu_title
+                                                                                                }
                                                                                             </DropdownItem>
                                                                                         )
                                                                                     )}
@@ -149,17 +152,22 @@ const Header2 = () => {
                                                     </UncontrolledDropdown>
                                                 ) : (
                                                     <NavItem key={index}>
-                                                        <NavLink href={navLink.path}>
-                                                            {navLink.menu_title}
-                                                        </NavLink>
+                                                        <NavLink href={navLink.path}>{navLink.menu_title}</NavLink>
                                                     </NavItem>
                                                 )
                                             )}
                                         </Nav>
                                     </Collapse>
                                     <div className="d-sm-flex align-items-center justify-content-end">
-                                        <Link className="btn-link" to="login">Login</Link>
-                                        <Link className="btn btn-primary btn-sm ms-3 d-sm-inline-block d-none" to="signup">Sign Up</Link>
+                                        <Link className="btn-link" to="login">
+                                            Login
+                                        </Link>
+                                        <Link
+                                            className="btn btn-primary btn-sm ms-3 d-sm-inline-block d-none"
+                                            to="signup"
+                                        >
+                                            Sign Up
+                                        </Link>
                                     </div>
                                 </Navbar>
                             </div>
@@ -168,7 +176,9 @@ const Header2 = () => {
                 </div>
             ) : (
                 <div id="ht-preloader">
-                    <div className="loader clear-loader"> <span>W</span>
+                    <div className="loader clear-loader">
+                        {' '}
+                        <span>W</span>
                         <span>i</span>
                         <span>n</span>
                         <span>c</span>

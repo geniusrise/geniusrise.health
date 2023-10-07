@@ -1,24 +1,25 @@
-import React, { useEffect, useRef, useState } from 'react'
-import "./style.css"
+import React, { useEffect, useRef, useState } from 'react';
+import './style.css';
 
-import {Form} from 'react-bulma-components'
-import Markdown from 'react-markdown'
-import axios from 'axios'
+import { Form } from 'react-bulma-components';
+import Markdown from 'react-markdown';
+import axios from 'axios';
 
 function FeatureL1() {
+    const gototop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
-  const gototop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+    const [chats, setChats] = useState([]);
+    const [currentMessage, setCurrentMessage] = useState('');
+    const [botIsTyping, setBotIsTyping] = useState(false);
+    const chatBoxRef = useRef(null);
+    const [apiResponses, setApiResponses] = useState({});
+    const [demographics, setDemographics] = useState({});
+    const [currentQuestion, setCurrentQuestion] = useState(null);
 
-  const [chats, setChats] = useState([]);
-  const [currentMessage, setCurrentMessage] = useState("");
-  const [botIsTyping, setBotIsTyping] = useState(false);
-  const chatBoxRef = useRef(null);
-  const [apiResponses, setApiResponses] = useState({});
-
-  useEffect(() => {
-    addBotMessage(`### Hello! 👋
+    useEffect(() => {
+        addBotMessage(`### Hello! 👋
 
 I'm your health assistant at geniusrise.health. I'm here to guide you to the right care, quickly.
 
@@ -30,206 +31,263 @@ Here's how it works:
 
 So, what brings you here today?
 `);
-  }, []);
+    }, []);
 
-  useEffect(() => {
-    if (chatBoxRef.current) {
-      chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
-    }
-  }, [chats]);
+    useEffect(() => {
+        if (chatBoxRef.current) {
+            chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+        }
+    }, [chats]);
 
-  const addBotMessage = (message, callback) => {
-    setChats(prevChats => [...prevChats, { who: "bot", message: "" }]);
-    simulateBotTyping(message, callback);
-  };
+    const addBotMessage = (message, callback) => {
+        setChats((prevChats) => [...prevChats, { who: 'bot', message: '' }]);
+        simulateBotTyping(message, callback);
+    };
 
-  const simulateBotTyping = (botMessage, callback) => {
-    setBotIsTyping(true);
-    let i = 0;
-    let tempMessage = "";
-    const typing = setInterval(() => {
-      if (i < botMessage.length) {
-        tempMessage += botMessage[i];
-        setChats(prevChats => {
-          const newChats = [...prevChats];
-          newChats[newChats.length - 1].message = tempMessage;
-          return newChats;
+    const simulateBotTyping = (botMessage, callback) => {
+        setBotIsTyping(true);
+        let i = 0;
+        let tempMessage = '';
+        const typing = setInterval(() => {
+            if (i < botMessage.length) {
+                tempMessage += botMessage[i];
+                setChats((prevChats) => {
+                    const newChats = [...prevChats];
+                    newChats[newChats.length - 1].message = tempMessage;
+                    return newChats;
+                });
+                i++;
+            } else {
+                clearInterval(typing);
+                setBotIsTyping(false);
+                if (callback) {
+                    callback();
+                }
+            }
+        }, 10);
+    };
+
+    const askDemographicQuestion = (question, key) => {
+        addBotMessage(question, () => {
+            setCurrentQuestion(key);
         });
-        i++;
-      } else {
-        clearInterval(typing);
-        setBotIsTyping(false);
-        if (callback) {
-          callback();
+    };
+
+    useEffect(() => {
+        if (currentQuestion === 'name') {
+            askDemographicQuestion('How old are you?', 'age');
+        } else if (currentQuestion === 'age') {
+            askDemographicQuestion('What is your gender?', 'gender');
+        } else if (currentQuestion === 'gender') {
+            // All questions have been asked
+            addBotMessage(`Thank you for providing your details. We can proceed now.`);
         }
-      }
-    }, 10);
-  };
+    }, [demographics]);
 
-  const fetchSymptoms = async (userInput) => {
-    try {
-      const response = await axios.post('http://localhost:2180/api/v1/ner', {
-        user_input: userInput
-      }, {
-        headers: {
-          'Content-Type': 'application/json'
+    const handleDemographicAnswer = (answer) => {
+        setDemographics((prevState) => ({
+            ...prevState,
+            [currentQuestion]: answer,
+        }));
+        setCurrentQuestion(null);
+    };
+
+    const askDemographics = () => {
+        askDemographicQuestion('What is your name?', 'name');
+    };
+
+    const fetchSymptoms = async (userInput) => {
+        try {
+            const response = await axios.post(
+                'http://localhost:2180/api/v1/ner',
+                {
+                    user_input: userInput,
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+
+            const { symptoms_diseases } = response.data;
+            setApiResponses((prevState) => ({
+                ...prevState,
+                symptoms: response.data,
+            }));
+            const uniqueSymptoms = Array.from(new Set(symptoms_diseases));
+            const formattedSymptoms = uniqueSymptoms.join(', ');
+
+            addBotMessage(
+                `I've identified the following unique symptoms and diseases based on your input: ${formattedSymptoms}`,
+                () => {
+                    fetchSemanticSearch(userInput, symptoms_diseases).then(() => {
+                        askDemographics(); // Start asking demographic questions after fetchSemanticSearch is done
+                    });
+                }
+            );
+        } catch (error) {
+            console.error('Error fetching symptoms:', error);
+            addBotMessage('Sorry, I encountered an error while fetching your symptoms. Please try again.');
         }
-      });
+    };
 
-      const { symptoms_diseases } = response.data;
-      setApiResponses(prevState => ({ ...prevState, symptoms: response.data }));
-      const uniqueSymptoms = Array.from(new Set(symptoms_diseases));
-      const formattedSymptoms = uniqueSymptoms.join(', ');
+    const fetchSemanticSearch = async (userInput, symptoms_diseases) => {
+        try {
+            const response = await axios.post(
+                'http://localhost:2180/api/v1/semantic_search',
+                {
+                    user_input: userInput,
+                    symptoms_diseases,
+                    semantic_similarity_cutoff: 0.9,
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
 
-      addBotMessage(`I've identified the following unique symptoms and diseases based on your input: ${formattedSymptoms}`, () => {
-        fetchSemanticSearch(userInput, symptoms_diseases);
-      });
-
-    } catch (error) {
-      console.error('Error fetching symptoms:', error);
-      addBotMessage('Sorry, I encountered an error while fetching your symptoms. Please try again.');
-    }
-  };
-
-
-  const fetchSemanticSearch = async (userInput, symptoms_diseases) => {
-    try {
-      const response = await axios.post('http://localhost:2180/api/v1/semantic_search', {
-        user_input: userInput,
-        symptoms_diseases,
-        semantic_similarity_cutoff: 0.9
-      }, {
-        headers: {
-          'Content-Type': 'application/json'
+            const { snomed_concepts } = response.data;
+            setApiResponses((prevState) => ({
+                ...prevState,
+                semanticSearch: response.data,
+            }));
+            const allConcepts = snomed_concepts.flat();
+            const uniqueConcepts = Array.from(new Set(allConcepts));
+            const formattedConcepts = uniqueConcepts.join(', ');
+            // addBotMessage(`Based on semantic search, the following unique concepts are related to your symptoms: ${formattedConcepts}`);
+        } catch (error) {
+            console.error('Error fetching semantic search:', error);
+            addBotMessage('Sorry, I encountered an error while performing semantic search. Please try again.');
         }
-      });
+    };
 
-      const { snomed_concepts } = response.data;
-      setApiResponses(prevState => ({ ...prevState, semanticSearch: response.data }));
-      const allConcepts = snomed_concepts.flat();
-      const uniqueConcepts = Array.from(new Set(allConcepts));
-      const formattedConcepts = uniqueConcepts.join(', ');
-      // addBotMessage(`Based on semantic search, the following unique concepts are related to your symptoms: ${formattedConcepts}`);
-    } catch (error) {
-      console.error('Error fetching semantic search:', error);
-      addBotMessage('Sorry, I encountered an error while performing semantic search. Please try again.');
-    }
-  };
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && !botIsTyping) {
+            e.preventDefault();
+            if (e.shiftKey) {
+                setCurrentMessage((prevMessage) => `${prevMessage}\n`);
+            } else {
+                setChats([...chats, { who: 'user', message: currentMessage }]);
 
+                if (currentQuestion) {
+                    handleDemographicAnswer(currentMessage);
+                } else {
+                    const lowerCaseMessage = currentMessage.toLowerCase().trim();
+                    if (lowerCaseMessage === 'hi' || lowerCaseMessage === 'hello' || lowerCaseMessage === 'hey') {
+                        addBotMessage('Hi there! How can I assist you today?');
+                    } else if (currentMessage.split(' ').length < 3) {
+                        addBotMessage('Could you please provide more details?');
+                    } else {
+                        fetchSymptoms(currentMessage);
+                    }
+                }
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && !botIsTyping) {
-      e.preventDefault();
-      if (e.shiftKey) {
-        setCurrentMessage(prevMessage => `${prevMessage}\n`);
-      } else {
-        setChats([...chats, { who: "user", message: currentMessage }]);
-
-        const lowerCaseMessage = currentMessage.toLowerCase().trim();
-        if (lowerCaseMessage === 'hi' || lowerCaseMessage === 'hello' || lowerCaseMessage === 'hey') {
-          addBotMessage("Hi there! How can I assist you today?");
-        } else if (currentMessage.split(" ").length < 3) {
-          addBotMessage("Could you please provide more details?");
-        } else {
-          fetchSymptoms(currentMessage);
+                setCurrentMessage('');
+            }
         }
+    };
 
-        setCurrentMessage("");
-      }
-    }
-  };
-
-  return (
-    <>
-      <section class="feature-background">
-        <div class="container feature-content">
-          <div
-            class="row justify-content-between align-items-center mb-4 mb-lg-0"
-          >
-            <div class="col-lg-7 col-md-5">
-              <div>
-                <div className='chat-window'>
-                  <Form.Field>
-                    <Form.Label className="text-dark text-center">Try out our in-patient genius.</Form.Label>
-                  </Form.Field>
-                    <div className='chat-box'  ref={chatBoxRef}>
-                      {chats.map((c, index) => (
-                        c.who === "user" ? (
-                          <div className='chat-bubble text-user' key={index}>
-                            <span className='chat-emoji'>🙂 <strong>me</strong></span>
-                            <Markdown>
-                              {c.message}
-                            </Markdown>
-                          </div>
-                        ) : (
-                          <div className='chat-bubble text-bot' key={index}>
-                            <span className='chat-emoji'>🙋‍♂️ <strong>genius</strong></span>
-                            <Markdown>
-                              {c.message}
-                            </Markdown>
-                          </div>
-                        )
-                      ))}
+    return (
+        <>
+            <section class="feature-background">
+                <div class="container feature-content">
+                    <div class="row justify-content-between align-items-center mb-4 mb-lg-0">
+                        <div class="col-lg-7 col-md-5">
+                            <div>
+                                <div className="chat-window">
+                                    <Form.Field>
+                                        <Form.Label className="text-dark text-center">
+                                            Try out our in-patient genius.
+                                        </Form.Label>
+                                    </Form.Field>
+                                    <div className="chat-box" ref={chatBoxRef}>
+                                        {chats.map((c, index) =>
+                                            c.who === 'user' ? (
+                                                <div className="chat-bubble text-user" key={index}>
+                                                    <span className="chat-emoji">
+                                                        🙂 <strong>me</strong>
+                                                    </span>
+                                                    <Markdown>{c.message}</Markdown>
+                                                </div>
+                                            ) : (
+                                                <div className="chat-bubble text-bot" key={index}>
+                                                    <span className="chat-emoji">
+                                                        🙋‍♂️ <strong>genius</strong>
+                                                    </span>
+                                                    <Markdown>{c.message}</Markdown>
+                                                </div>
+                                            )
+                                        )}
+                                    </div>
+                                    <Form.Field>
+                                        <Form.Label className="text-dark">
+                                            Write a message, press enter to send.
+                                        </Form.Label>
+                                        <Form.Textarea
+                                            rows={2}
+                                            value={currentMessage}
+                                            disabled={botIsTyping}
+                                            onChange={(e) => {
+                                                return setCurrentMessage(e.target.value);
+                                            }}
+                                            onKeyDown={handleKeyDown}
+                                        />
+                                    </Form.Field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-7">
+                            <div class="p-5 feature-hover active position-relative">
+                                <div class="f-icon">
+                                    <i class="flaticon-prototype"></i>
+                                </div>
+                                {/* <img src={require("../../../../assets/icon/feedback.png")} className='cimg' /> */}
+                                <h4 class="mt-4 mb-3">In - patient and Out - patient interactions</h4>
+                                <p class="mb-0 custom-description-text">
+                                    Collect relevant information from incoming patients, ask relevant follow-up
+                                    questions and guide the patient to the right department. Provide clear and detailed
+                                    action items from diagnosis and discharge summaries.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                  <Form.Field>
-                    <Form.Label className="text-dark">Write a message, press enter to send.</Form.Label>
-                    <Form.Textarea
-                      rows={2}
-                      value={currentMessage}
-                      disabled={botIsTyping}
-                      onChange={(e) => {
-                        return setCurrentMessage(e.target.value);
-                      }}
-                      onKeyDown={handleKeyDown}
-                    />
-                  </Form.Field>
+                    <div class="row mt-lg-n5 align-items-center">
+                        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                            <div class="p-5 feature-hover position-relative">
+                                <div class="f-icon">
+                                    <i class="flaticon-knowledge"></i>
+                                </div>
+                                <h4 class="mt-4 mb-3">Patient - Establishment interactions</h4>
+                                <p class="mb-0 custom-description-text">
+                                    Empower staff, lab techs and other personnel with relevant information about the
+                                    patient, predict resource utilization before patient checks into the premises.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                            <div class="p-5 feature-hover position-relative">
+                                <div class="f-icon">
+                                    <i class="flaticon-thumbs-up"></i>
+                                </div>
+                                <h4 class="mt-4 mb-3">Patient - Doctor interactions</h4>
+                                <p class="mb-0 custom-description-text">
+                                    Empower doctors with all the relevant information about the patient, and help with
+                                    decision support to make the right testing diagnostic and treatment choices.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-12 text-center">
+                            <div class="btn btn-primary mt-lg-8" onClick={gototop}>
+                                And Many More
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-7">
-              <div class="p-5 feature-hover active position-relative">
-                <div class="f-icon"><i class="flaticon-prototype"></i></div>
-                {/* <img src={require("../../../../assets/icon/feedback.png")} className='cimg' /> */}
-                <h4 class="mt-4 mb-3">In - patient and Out - patient interactions</h4>
-                <p class="mb-0 custom-description-text">
-                  Collect relevant information from incoming patients, ask relevant follow-up questions
-                  and guide the patient to the right department. Provide clear and detailed action items
-                  from diagnosis and discharge summaries.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="row mt-lg-n5 align-items-center">
-            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-              <div class="p-5 feature-hover position-relative">
-                <div class="f-icon"><i class="flaticon-knowledge"></i></div>
-                <h4 class="mt-4 mb-3">Patient - Establishment interactions</h4>
-                <p class="mb-0 custom-description-text">
-                  Empower staff, lab techs and other personnel with relevant information about the patient,
-                  predict resource utilization before patient checks into the premises.
-                </p>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-              <div class="p-5 feature-hover position-relative">
-                <div class="f-icon"><i class="flaticon-thumbs-up"></i></div>
-                <h4 class="mt-4 mb-3">Patient - Doctor interactions</h4>
-                <p class="mb-0 custom-description-text">
-                  Empower doctors with all the relevant information about the patient,
-                  and help with decision support to make the right testing diagnostic and treatment choices.
-                </p>
-              </div>
-            </div>
-            <div class="col-lg-4 col-12 text-center">
-              <div class="btn btn-primary mt-lg-8" onClick={gototop}>
-                And Many More
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  )
+            </section>
+        </>
+    );
 }
 
-export default FeatureL1
+export default FeatureL1;

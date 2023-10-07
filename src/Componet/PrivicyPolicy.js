@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 
 const sectionsData = [
@@ -31,7 +31,6 @@ const sectionsData = [
     },
 ];
 
-
 function Privacy() {
     return (
         <>
@@ -40,13 +39,19 @@ function Privacy() {
                     <Row>
                         <Col lg="12" md="12">
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem error quae illo excepturi nostrum blanditiis laboriosam magnam explicabo.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem error quae illo
+                                excepturi nostrum blanditiis laboriosam magnam explicabo.
                             </p>
                             <p>
-                                eum nihil expedita dolorum odio dolorem, explicabo rem illum magni perferendis. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem error quae illo excepturi nostrum blanditiis laboriosam magnam explicabo. Molestias, eum nihil expedita dolorum odio dolorem, explicabo rem illum magni perferendis.
+                                eum nihil expedita dolorum odio dolorem, explicabo rem illum magni perferendis. Lorem
+                                ipsum dolor sit amet, consectetur adipisicing elit. Quidem error quae illo excepturi
+                                nostrum blanditiis laboriosam magnam explicabo. Molestias, eum nihil expedita dolorum
+                                odio dolorem, explicabo rem illum magni perferendis.
                             </p>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem error quae illo excepturi nostrum blanditiis laboriosam magnam explicabo. Molestias, eum nihil expedita dolorum odio dolorem, explicabo rem illum magni perferendis.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem error quae illo
+                                excepturi nostrum blanditiis laboriosam magnam explicabo. Molestias, eum nihil expedita
+                                dolorum odio dolorem, explicabo rem illum magni perferendis.
                             </p>
 
                             {sectionsData.map((section, index) => (
@@ -64,14 +69,16 @@ function Privacy() {
                             ))}
 
                             <p className="mt-5 mb-0">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, ex, quisquam. Nulla excepturi sint iusto incidunt sed omnis expedita, commodi dolores. Debitis nemo animi quia deleniti commodi nesciunt illo. Deserunt.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, ex, quisquam. Nulla
+                                excepturi sint iusto incidunt sed omnis expedita, commodi dolores. Debitis nemo animi
+                                quia deleniti commodi nesciunt illo. Deserunt.
                             </p>
                         </Col>
                     </Row>
                 </Container>
             </section>
         </>
-    )
+    );
 }
 
-export default Privacy
+export default Privacy;

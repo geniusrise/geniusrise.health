@@ -1,6 +1,6 @@
-import React from 'react'
-import HerosectionHeader from '../../Componet/Herosection/HerosectionHeader'
-import NewsletterL1 from '../../Componet/Newsletter/NewsletterL1'
+import React from 'react';
+import HerosectionHeader from '../../Componet/Herosection/HerosectionHeader';
+import NewsletterL1 from '../../Componet/Newsletter/NewsletterL1';
 
 const TeamMember = ({ name, role, image, social }) => {
     return (
@@ -26,7 +26,6 @@ const TeamMember = ({ name, role, image, social }) => {
         </div>
     );
 };
-
 
 const FeatureTeamPage = () => {
     const TeamMembersData = [
@@ -78,11 +77,10 @@ const FeatureTeamPage = () => {
                 { id: 4, icon: 'la la-linkedin', link: '#' },
             ],
         },
-        
     ];
     return (
         <>
-            <HerosectionHeader name={"Team"} folder1={"Features"} />
+            <HerosectionHeader name={'Team'} folder1={'Features'} />
             <div class="page-content">
                 <section>
                     <div className="container">
@@ -101,7 +99,13 @@ const FeatureTeamPage = () => {
                         <div className="row">
                             {/* Map through the team members data and render each TeamMember */}
                             {TeamMembersData.map((member) => (
-                                <TeamMember key={member.id} name={member.name} role={member.role} image={member.image} social={member.social} />
+                                <TeamMember
+                                    key={member.id}
+                                    name={member.name}
+                                    role={member.role}
+                                    image={member.image}
+                                    social={member.social}
+                                />
                             ))}
                         </div>
                     </div>
@@ -109,7 +113,7 @@ const FeatureTeamPage = () => {
                 <NewsletterL1 />
             </div>
         </>
-    )
-}
+    );
+};
 
 export default FeatureTeamPage;

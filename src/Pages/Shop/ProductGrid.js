@@ -3,21 +3,11 @@ import Lightbox from 'react-18-image-lightbox';
 import 'react-18-image-lightbox/style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {
-    Card,
-    CardText,
-    Col,
-    Container,
-    Row
-} from 'reactstrap';
+import { Card, CardText, Col, Container, Row } from 'reactstrap';
 import HerosectionHeader from '../../Componet/Herosection/HerosectionHeader';
 import ProductPagination from '../../Componet/ProductPagination';
 import SideBar from '../../Componet/Sidebar/Sidebar';
-import {
-    addToCart,
-    addToWishList,
-    setSelectedProduct,
-} from '../../store/reducer/productReducer';
+import { addToCart, addToWishList, setSelectedProduct } from '../../store/reducer/productReducer';
 
 function ProductGrid() {
     const dispatch = useDispatch();
@@ -39,18 +29,13 @@ function ProductGrid() {
             case 1: // Newest Item
                 return state.products.filteredProducts;
             case 2: // High To Low
-                return state.products.filteredProducts
-                    .slice()
-                    .sort((a, b) => b.price - a.price);
+                return state.products.filteredProducts.slice().sort((a, b) => b.price - a.price);
             case 3: // Low To High
-                return state.products.filteredProducts
-                    .slice()
-                    .sort((a, b) => a.price - b.price);
+                return state.products.filteredProducts.slice().sort((a, b) => a.price - b.price);
             default:
                 return state.products.filteredProducts;
         }
     });
-
 
     const [activePage, setActivePage] = useState(1);
     const pageSize = 6;
@@ -99,12 +84,11 @@ function ProductGrid() {
     const [photoIndex, setPhotoIndex] = useState(0);
     const [selectedProduct, setSelectedProduct1] = useState(null);
 
-
     console.log(productsToShow);
 
     return (
         <div className="page-wrapper">
-            <HerosectionHeader name={"Product Grid"} folder1={"Shop"} />
+            <HerosectionHeader name={'Product Grid'} folder1={'Shop'} />
             <div className="page-content">
                 <section>
                     <Container>
@@ -115,27 +99,26 @@ function ProductGrid() {
                                         <Row className="align-items-center">
                                             <Col md="5" className="mb-3 mb-md-0">
                                                 <CardText tag="span" className="text-muted">
-                                                    Showing 1 to {productsToShow.length} of{' '}
-                                                    {filteredProducts.length} total
+                                                    Showing 1 to {productsToShow.length} of {filteredProducts.length}{' '}
+                                                    total
                                                 </CardText>
                                             </Col>
-                                            <Col
-                                                md="7"
-                                                className="d-flex align-items-center justify-content-md-end"
-                                            >
+                                            <Col md="7" className="d-flex align-items-center justify-content-md-end">
                                                 <div className="view-filter">
                                                     <Link
                                                         to="/product-grid"
-                                                        className={`me-2 ${activeFilter === 'grid' ? 'active text-primary' : ''
-                                                            }`}
+                                                        className={`me-2 ${
+                                                            activeFilter === 'grid' ? 'active text-primary' : ''
+                                                        }`}
                                                         onClick={() => handleFilterClick('grid')}
                                                     >
                                                         <i className="lab la-buromobelexperte"></i>
                                                     </Link>
                                                     <Link
                                                         to="/product-list"
-                                                        className={`text-dark ${activeFilter === 'list' ? 'active text-primary' : ''
-                                                            }`}
+                                                        className={`text-dark ${
+                                                            activeFilter === 'list' ? 'active text-primary' : ''
+                                                        }`}
                                                         onClick={() => handleFilterClick('list')}
                                                     >
                                                         <i className="las la-list"></i>
@@ -168,38 +151,59 @@ function ProductGrid() {
                                                     alt=""
                                                 />
                                                 <div className="card-body">
-                                                    <div className="product-title"><Link
-                                                        onClick={() => {
-                                                            dispatch(setSelectedProduct(product.id));
-                                                        }}
-                                                        to="/product-single"
-                                                        className="product-title text-black"
-                                                    >
-                                                        {product.name}
-                                                    </Link></div>
-                                                    <div className="mt-1"> <span className="product-price"><del className="text-muted">${product.price}</del> ${product.salePrice}</span>
+                                                    <div className="product-title">
+                                                        <Link
+                                                            onClick={() => {
+                                                                dispatch(setSelectedProduct(product.id));
+                                                            }}
+                                                            to="/product-single"
+                                                            className="product-title text-black"
+                                                        >
+                                                            {product.name}
+                                                        </Link>
+                                                    </div>
+                                                    <div className="mt-1">
+                                                        {' '}
+                                                        <span className="product-price">
+                                                            <del className="text-muted">${product.price}</del> $
+                                                            {product.salePrice}
+                                                        </span>
                                                     </div>
                                                 </div>
                                                 <div className="product-link d-flex align-items-center justify-content-center mt-4">
-                                                    <button className="btn-compare" type="button" onClick={() => {
-                                                        setIsOpen(true);
-                                                        setSelectedProduct(product);
-                                                    }}><i className="las la-random"></i>
+                                                    <button
+                                                        className="btn-compare"
+                                                        type="button"
+                                                        onClick={() => {
+                                                            setIsOpen(true);
+                                                            setSelectedProduct(product);
+                                                        }}
+                                                    >
+                                                        <i className="las la-random"></i>
                                                     </button>
-                                                    <button className="btn-cart mx-3" type="button"><i className="las la-shopping-cart me-1" onClick={() => {
-                                                        handleAddToCart(product);
-                                                    }}></i>
+                                                    <button className="btn-cart mx-3" type="button">
+                                                        <i
+                                                            className="las la-shopping-cart me-1"
+                                                            onClick={() => {
+                                                                handleAddToCart(product);
+                                                            }}
+                                                        ></i>
                                                     </button>
-                                                    <button className="btn-wishlist" type="button" onClick={() => {
-                                                        handleAddToWishList(product);
-                                                    }}><i className="lar la-heart"></i>
+                                                    <button
+                                                        className="btn-wishlist"
+                                                        type="button"
+                                                        onClick={() => {
+                                                            handleAddToWishList(product);
+                                                        }}
+                                                    >
+                                                        <i className="lar la-heart"></i>
                                                     </button>
                                                 </div>
                                             </div>
                                         </Col>
                                     ))}
                                 </Row>
-                                <Row className='my-5'>
+                                <Row className="my-5">
                                     <ProductPagination
                                         activePage={activePage}
                                         totalPages={totalPages}
@@ -217,20 +221,24 @@ function ProductGrid() {
             {selectedProduct && (
                 <Lightbox
                     mainSrc={require(`../../assets/images/${selectedProduct.pictures[photoIndex]}`)}
-                    nextSrc={require(`../../assets/images/${selectedProduct.pictures[(photoIndex + 1) % selectedProduct.pictures.length]
-                        }`)}
-                    prevSrc={require(`../../assets/images/${selectedProduct.pictures[
-                        (photoIndex + selectedProduct.pictures.length - 1) % selectedProduct.pictures.length
-                    ]
-                        }`)}
+                    nextSrc={require(`../../assets/images/${
+                        selectedProduct.pictures[(photoIndex + 1) % selectedProduct.pictures.length]
+                    }`)}
+                    prevSrc={require(`../../assets/images/${
+                        selectedProduct.pictures[
+                            (photoIndex + selectedProduct.pictures.length - 1) % selectedProduct.pictures.length
+                        ]
+                    }`)}
                     onCloseRequest={() => setSelectedProduct1(null)}
-                    onMovePrevRequest={() => setPhotoIndex((photoIndex + selectedProduct.pictures.length - 1) % selectedProduct.pictures.length)}
+                    onMovePrevRequest={() =>
+                        setPhotoIndex(
+                            (photoIndex + selectedProduct.pictures.length - 1) % selectedProduct.pictures.length
+                        )
+                    }
                     onMoveNextRequest={() => setPhotoIndex((photoIndex + 1) % selectedProduct.pictures.length)}
                     enableZoom={false}
                 />
             )}
-
-
         </div>
     );
 }

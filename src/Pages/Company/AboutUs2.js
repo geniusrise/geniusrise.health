@@ -1,10 +1,10 @@
-import React from 'react'
-import AboutL1 from '../../Componet/About/AboutL1'
-import CounterL3 from '../../Componet/Counter/CounterL3'
-import BlogL3 from '../../Componet/Blog/BlogL3'
-import NewsletterL1 from '../../Componet/Newsletter/NewsletterL1'
-import HerosectionHeader from '../../Componet/Herosection/HerosectionHeader'
-import ServiceL2 from '../../Componet/Service/ServiceL2'
+import React from 'react';
+import AboutL1 from '../../Componet/About/AboutL1';
+import CounterL3 from '../../Componet/Counter/CounterL3';
+import BlogL3 from '../../Componet/Blog/BlogL3';
+import NewsletterL1 from '../../Componet/Newsletter/NewsletterL1';
+import HerosectionHeader from '../../Componet/Herosection/HerosectionHeader';
+import ServiceL2 from '../../Componet/Service/ServiceL2';
 
 const TeamMember = ({ name, role, image, social }) => {
     return (
@@ -81,11 +81,10 @@ const AboutUs2 = () => {
                 { id: 4, icon: 'la la-linkedin', link: '#' },
             ],
         },
-
     ];
     return (
         <>
-            <HerosectionHeader folder1={"pages"} folder2={"Company"} name={"About US 2"} />
+            <HerosectionHeader folder1={'pages'} folder2={'Company'} name={'About US 2'} />
             <div class="page-content">
                 <AboutL1 />
                 <CounterL3 />
@@ -100,7 +99,8 @@ const AboutUs2 = () => {
                                             <span className="font-w-4">Meet Our</span> Team Of Expert
                                         </h2>
                                         <p className="lead mb-0">
-                                            We use the latest technologies it voluptatem accusantium doloremque laudantium.
+                                            We use the latest technologies it voluptatem accusantium doloremque
+                                            laudantium.
                                         </p>
                                     </div>
                                 </div>
@@ -108,7 +108,13 @@ const AboutUs2 = () => {
                             <div className="row mb-5">
                                 {/* Map through the team members data and render each TeamMember */}
                                 {TeamMembersData.map((member) => (
-                                    <TeamMember key={member.id} name={member.name} role={member.role} image={member.image} social={member.social} />
+                                    <TeamMember
+                                        key={member.id}
+                                        name={member.name}
+                                        role={member.role}
+                                        image={member.image}
+                                        social={member.social}
+                                    />
                                 ))}
                             </div>
                         </div>
@@ -118,7 +124,7 @@ const AboutUs2 = () => {
                 <NewsletterL1 />
             </div>
         </>
-    )
-}
+    );
+};
 
-export default AboutUs2
+export default AboutUs2;

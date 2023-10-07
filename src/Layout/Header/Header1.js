@@ -51,9 +51,7 @@ const Header1 = () => {
         }
     };
     const handleScroll = () => {
-        var scrollTop =
-            (document.documentElement && document.documentElement.scrollTop) ||
-            document.body.scrollTop;
+        var scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
         if (scrollTop > 100) {
             setVisible(true);
         } else {
@@ -70,7 +68,6 @@ const Header1 = () => {
             return () => clearTimeout(timeout);
         }
     }, [loader]);
-
 
     return (
         <header id="site-header" className="header">

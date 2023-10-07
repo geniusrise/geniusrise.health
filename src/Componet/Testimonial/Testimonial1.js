@@ -81,17 +81,27 @@ const TestimonialSection = () => {
 
     return (
         <>
-            <section class="bg-pos-r" data-bg-img="assets/images/bg/01.png" style={{ backgroundImage: `url(${require('../../assets/images/bg/01.png')})` }}>
+            <section
+                class="bg-pos-r"
+                data-bg-img="assets/images/bg/01.png"
+                style={{ backgroundImage: `url(${require('../../assets/images/bg/01.png')})` }}
+            >
                 <div class="container">
                     <div class="row justify-content-center text-center">
                         <div class="col-lg-8">
                             <div class="mb-5">
-                                <h2><span class="font-w-4 d-block">You can see our clients</span> feedback what you say?</h2>
+                                <h2>
+                                    <span class="font-w-4 d-block">You can see our clients</span> feedback what you say?
+                                </h2>
                             </div>
                         </div>
                     </div>
-                    <div id="testimonial" class="testimonial-carousel carousel slide testimonial z-index-1"
-                        data-bs-ride="carousel" data-bs-interval="2500">
+                    <div
+                        id="testimonial"
+                        class="testimonial-carousel carousel slide testimonial z-index-1"
+                        data-bs-ride="carousel"
+                        data-bs-interval="2500"
+                    >
                         <div class="row justify-content-center text-center">
                             <div class="col-md-7">
                                 <OwlCarousel className="testimonial-carousel" {...options} startPosition={activeSlide}>
@@ -101,14 +111,24 @@ const TestimonialSection = () => {
                                                 {/* <div key={testimonial.id} className={activeSlide === index ? "carousel-item active" : "carousel-item"}> */}
                                                 <div className="card p-2 p-md-5 border-0">
                                                     <div className="mb-3">
-                                                        <img alt="Image1"
-                                                            src={require(`../../assets/images/testimonial/${testimonial.image.split('/')[3]}`)} className="shadow-primary img-fluid rounded-circle d-inline" style={{ height: '10rem', width: '10rem' }} />
+                                                        <img
+                                                            alt="Image1"
+                                                            src={require(`../../assets/images/testimonial/${
+                                                                testimonial.image.split('/')[3]
+                                                            }`)}
+                                                            className="shadow-primary img-fluid rounded-circle d-inline"
+                                                            style={{ height: '10rem', width: '10rem' }}
+                                                        />
                                                     </div>
                                                     <div className="card-body p-0">
                                                         <p className="lead font-w-5">{testimonial.text}</p>
                                                         <div>
-                                                            <h5 className="text-primary d-inline">{testimonial.name}</h5>
-                                                            <small className="text-muted fst-italic">{testimonial.role}</small>
+                                                            <h5 className="text-primary d-inline">
+                                                                {testimonial.name}
+                                                            </h5>
+                                                            <small className="text-muted fst-italic">
+                                                                {testimonial.role}
+                                                            </small>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -124,19 +144,19 @@ const TestimonialSection = () => {
                                 {testimonials.map((testimonial, index) => (
                                     <li
                                         key={testimonial.id}
-                                        className={activeSlide === index ? "active" : ""}
+                                        className={activeSlide === index ? 'active' : ''}
                                         data-bs-target="#testimonial"
                                         data-bs-slide-to={index}
-                                        style={{ cursor: "pointer" }}
+                                        style={{ cursor: 'pointer' }}
                                     >
-
                                         <img
                                             className="img-fluid rounded-circle shadow-primary"
-                                            src={require(`../../assets/images/testimonial/${testimonial.image.split('/')[3]}`)}
+                                            src={require(`../../assets/images/testimonial/${
+                                                testimonial.image.split('/')[3]
+                                            }`)}
                                             alt=""
                                             onClick={() => handleAvatarClick(index)}
                                         />
-
                                     </li>
                                 ))}
                             </ul>
@@ -144,7 +164,7 @@ const TestimonialSection = () => {
                     </div>
                 </div>
             </section>
-        </ >
+        </>
     );
 };
 export default TestimonialSection;

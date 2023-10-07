@@ -56,14 +56,15 @@ const Terms = () => {
                                             {paragraph}
                                         </p>
                                     ))}
-                                    {section.checkList && section.checkList.map((item, iIndex) => (
-                                        <div className="d-flex align-items-center mb-3" key={iIndex}>
-                                            <div className="bg-light rounded p-1">
-                                                <i className="las la-check" />
+                                    {section.checkList &&
+                                        section.checkList.map((item, iIndex) => (
+                                            <div className="d-flex align-items-center mb-3" key={iIndex}>
+                                                <div className="bg-light rounded p-1">
+                                                    <i className="las la-check" />
+                                                </div>
+                                                <p className="mb-0 ms-3">{item}</p>
                                             </div>
-                                            <p className="mb-0 ms-3">{item}</p>
-                                        </div>
-                                    ))}
+                                        ))}
                                 </React.Fragment>
                             ))}
                             <a className="btn btn-primary me-1" href="/">

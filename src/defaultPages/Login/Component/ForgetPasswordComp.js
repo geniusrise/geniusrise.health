@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Forgotpass() {
@@ -16,21 +16,33 @@ function Forgotpass() {
                                 <form id="contact-form" method="post" action="php/contact.php">
                                     <div className="messages" />
                                     <div className="form-group">
-                                        <input id="form_email" type="email" name="email" className="form-control" placeholder="Email" required="required" data-error="Valid email is required." />
+                                        <input
+                                            id="form_email"
+                                            type="email"
+                                            name="email"
+                                            className="form-control"
+                                            placeholder="Email"
+                                            required="required"
+                                            data-error="Valid email is required."
+                                        />
                                         <div className="help-block with-errors" />
-                                    </div> <a href="/" className="btn btn-primary btn-block">Forgot Now</a>
+                                    </div>{' '}
+                                    <a href="/" className="btn btn-primary btn-block">
+                                        Forgot Now
+                                    </a>
                                 </form>
-                                <div className="mt-4"> 
-                                <Link className="link-title" to="/sign_in">Back to sign in</Link>
+                                <div className="mt-4">
+                                    <Link className="link-title" to="/sign_in">
+                                        Back to sign in
+                                    </Link>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-
         </>
-    )
+    );
 }
 
 export default Forgotpass;

@@ -1,16 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
-import portFolioItems from "../../api/portfolio";
+import { createSlice } from '@reduxjs/toolkit';
+import portFolioItems from '../../api/portfolio';
 const portFolioSlice = createSlice({
-  name: "portFolio",
-  initialState: {
-    portFolioItems: portFolioItems,
-    selectedPortFolio: "",
-  },
-  reducers: {
-    setSelectedPortFolio(state, action) {
-      state.selectedPortFolio = action.payload;
+    name: 'portFolio',
+    initialState: {
+        portFolioItems: portFolioItems,
+        selectedPortFolio: '',
     },
-  },
+    reducers: {
+        setSelectedPortFolio(state, action) {
+            state.selectedPortFolio = action.payload;
+        },
+    },
 });
 
 export const { setSelectedPortFolio } = portFolioSlice.actions;

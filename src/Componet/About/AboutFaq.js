@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { Collapse } from 'reactstrap';
-
 
 function AboutFAQ() {
     const [openAccordion, setOpenAccordion] = useState(1);
@@ -14,7 +13,7 @@ function AboutFAQ() {
                 <div className="container">
                     <div className="row align-items-center justify-content-between">
                         <div className="col-12 col-lg-6 mb-8 mb-lg-0">
-                            <img src={require("../../assets/images/about/04.png")} alt="Image1" className="img-fluid" />
+                            <img src={require('../../assets/images/about/04.png')} alt="Image1" className="img-fluid" />
                         </div>
                         <div className="col-12 col-lg-6 col-xl-5">
                             <div className="accordion" id="accordion">
@@ -30,9 +29,14 @@ function AboutFAQ() {
                                             When our power of choice geniusrise.health ?
                                         </button>
                                     </h2>
-                                    <Collapse isOpen={openAccordion === 1} aria-labelledby="headingOne" data-bs-parent="#accordion">
+                                    <Collapse
+                                        isOpen={openAccordion === 1}
+                                        aria-labelledby="headingOne"
+                                        data-bs-parent="#accordion"
+                                    >
                                         <div className="accordion-body text-muted">
-                                            Looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites and web page editors.
+                                            Looked up one of the more obscure Latin words, consectetur, from a Lorem
+                                            Ipsum passage, and going through the cites and web page editors.
                                         </div>
                                     </Collapse>
                                 </div>
@@ -48,9 +52,14 @@ function AboutFAQ() {
                                             Nam libero tempore, cum soluta nobis ?
                                         </button>
                                     </h2>
-                                    <Collapse isOpen={openAccordion === 2} aria-labelledby="headingTwo" data-bs-parent="#accordion">
+                                    <Collapse
+                                        isOpen={openAccordion === 2}
+                                        aria-labelledby="headingTwo"
+                                        data-bs-parent="#accordion"
+                                    >
                                         <div className="accordion-body text-muted">
-                                            Looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites and web page editors.
+                                            Looked up one of the more obscure Latin words, consectetur, from a Lorem
+                                            Ipsum passage, and going through the cites and web page editors.
                                         </div>
                                     </Collapse>
                                 </div>
@@ -66,9 +75,14 @@ function AboutFAQ() {
                                             which is the same as saying through ?
                                         </button>
                                     </h2>
-                                    <Collapse isOpen={openAccordion === 3} aria-labelledby="headingThree" data-bs-parent="#accordion">
+                                    <Collapse
+                                        isOpen={openAccordion === 3}
+                                        aria-labelledby="headingThree"
+                                        data-bs-parent="#accordion"
+                                    >
                                         <div className="accordion-body text-muted">
-                                            Looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites and web page editors.
+                                            Looked up one of the more obscure Latin words, consectetur, from a Lorem
+                                            Ipsum passage, and going through the cites and web page editors.
                                         </div>
                                     </Collapse>
                                 </div>
@@ -78,7 +92,7 @@ function AboutFAQ() {
                 </div>
             </section>
         </>
-    )
+    );
 }
 
-export default AboutFAQ
+export default AboutFAQ;
