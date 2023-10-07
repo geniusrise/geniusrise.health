@@ -15,6 +15,7 @@ function FeatureL1() {
   const [currentMessage, setCurrentMessage] = useState("");
   const [botIsTyping, setBotIsTyping] = useState(false);
   const chatBoxRef = useRef(null);
+  const [apiResponses, setApiResponses] = useState({});
 
   useEffect(() => {
     addBotMessage(`### Hello! 👋
@@ -37,12 +38,12 @@ So, what brings you here today?
     }
   }, [chats]);
 
-  const addBotMessage = (message) => {
+  const addBotMessage = (message, callback) => {
     setChats(prevChats => [...prevChats, { who: "bot", message: "" }]);
-    simulateBotTyping(message);
+    simulateBotTyping(message, callback);
   };
 
-  const simulateBotTyping = (botMessage) => {
+  const simulateBotTyping = (botMessage, callback) => {
     setBotIsTyping(true);
     let i = 0;
     let tempMessage = "";
@@ -58,8 +59,11 @@ So, what brings you here today?
       } else {
         clearInterval(typing);
         setBotIsTyping(false);
+        if (callback) {
+          callback();
+        }
       }
-    }, 30);
+    }, 10);
   };
 
   const fetchSymptoms = async (userInput) => {
@@ -73,13 +77,45 @@ So, what brings you here today?
       });
 
       const { symptoms_diseases } = response.data;
-      const formattedSymptoms = symptoms_diseases.join(', ');
-      addBotMessage(`I've identified the following symptoms and diseases based on your input: ${formattedSymptoms}`);
+      setApiResponses(prevState => ({ ...prevState, symptoms: response.data }));
+      const uniqueSymptoms = Array.from(new Set(symptoms_diseases));
+      const formattedSymptoms = uniqueSymptoms.join(', ');
+
+      addBotMessage(`I've identified the following unique symptoms and diseases based on your input: ${formattedSymptoms}`, () => {
+        fetchSemanticSearch(userInput, symptoms_diseases);
+      });
+
     } catch (error) {
       console.error('Error fetching symptoms:', error);
       addBotMessage('Sorry, I encountered an error while fetching your symptoms. Please try again.');
     }
   };
+
+
+  const fetchSemanticSearch = async (userInput, symptoms_diseases) => {
+    try {
+      const response = await axios.post('http://localhost:2180/api/v1/semantic_search', {
+        user_input: userInput,
+        symptoms_diseases,
+        semantic_similarity_cutoff: 0.9
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const { snomed_concepts } = response.data;
+      setApiResponses(prevState => ({ ...prevState, semanticSearch: response.data }));
+      const allConcepts = snomed_concepts.flat();
+      const uniqueConcepts = Array.from(new Set(allConcepts));
+      const formattedConcepts = uniqueConcepts.join(', ');
+      // addBotMessage(`Based on semantic search, the following unique concepts are related to your symptoms: ${formattedConcepts}`);
+    } catch (error) {
+      console.error('Error fetching semantic search:', error);
+      addBotMessage('Sorry, I encountered an error while performing semantic search. Please try again.');
+    }
+  };
+
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !botIsTyping) {
