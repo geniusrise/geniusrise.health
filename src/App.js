@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import "./Vender"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import 'bulma/css/bulma.min.css';
 import $ from 'jquery';
 import { Route, Routes, useLocation, Outlet } from 'react-router-dom'
 import Landing1 from './Pages/Home/Landing1/Landing1'

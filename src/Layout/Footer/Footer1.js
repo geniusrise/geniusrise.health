@@ -63,7 +63,7 @@ function Footer1() {
                                 </li>
                             </ul>
                         </div>
-                        <div className="col-12 col-lg-6 col-xl-7">
+                        <div className="col-12 col-lg-6 col-xl-6">
                             <div className="row">
                                 <div className="col-12 col-sm-4 navbar-light">
                                     <h5 className="mb-4">Pages</h5>
@@ -105,9 +105,9 @@ function Footer1() {
                     </div>
                     <div className="row align-items-center mb-5">
                         <div className="col-md-6">
-                            Copyright ©2020 All rights reserved | geniusrise.health is made by
-                            <i className="lar la-heart text-primary heartBeat2"></i>
-                            <u><Link className="text-primary" to="https://geniusrise.ai">  geniusrise.ai</Link></u>
+                            Copyright ©2023 All rights reserved | geniusrise.health is made by<span> </span>
+                            <i className="lar la-heart text-primary heartBeat2"> </i>
+                            <u><Link className="text-primary" to="https://geniusrise.ai"> geniusrise.ai</Link></u>
                         </div>
                         <div className="col-md-6 text-md-end mt-3 mt-md-0">
                             <ul className="list-inline mb-0">
