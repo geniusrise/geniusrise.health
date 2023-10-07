@@ -1,6 +1,157 @@
-.custom-get-text {
+.chat-window {
+    /* height: 100%;
+    width: 100%; */
+    min-height: 40rem;
+    /* background-color: green; */
+    padding: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 20px;
+    border: 2px solid #f34960;
 }
 
-.custom-button {
-    background-color: rgba(239, 8, 8, 0.1);
+.chat-box {
+    height: 30rem;
+    overflow-y: scroll;
+    font-size: 0.8rem;
+}
+
+.chat-window textarea {
+    color: white;
+    background-color: inherit;
+    font-size: large;
+}
+
+.text-user {
+    color: white;
+    background-color: rgba(31, 31, 31, 0.892);
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 10px;
+    font-weight: 400;
+}
+
+.text-user strong {
+    color: #f34960;
+}
+
+.text-bot {
+    color: white;
+    background-color: rgba(31, 31, 31, 0.892);
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 10px;
+    font-weight: 400;
+}
+
+.text-bot strong {
+    color: #f34960;
+}
+
+.chat-emoji {
+    font-size: 1.2rem;
+}
+
+/* Markdown */
+.chat-box h1 {
+    color: #f34960;
+    /* Warm Gold for Headers */
+    font-size: 2rem;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.chat-box h2 {
+    color: #f34960;
+    font-size: 1.8rem;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.chat-box h3 {
+    color: #f34960;
+    font-size: 1.6rem;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.chat-box h4 {
+    color: #f34960;
+    font-size: 1.4rem;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.chat-box h5 {
+    color: #f34960;
+    font-size: 1.2rem;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.chat-box h6 {
+    color: #f34960;
+    font-size: 1rem;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.chat-box p {
+    color: #ffffff;
+    /* Warm Light Salmon for Text */
+    margin: 0.2em 0;
+}
+
+.chat-box ul,
+.chat-box ol {
+    margin: 0.5em 0;
+    padding-left: 1em;
+}
+
+.chat-box li {
+    color: #ffffff;
+    /* Warm Tomato for List Items */
+}
+
+.chat-box blockquote {
+    border-left: 4px solid #ff4500;
+    /* Warm Orange-Red for Blockquote Border */
+    padding-left: 1em;
+    color: #ff8c00;
+    /* Warm Dark Orange for Blockquote Text */
+}
+
+.chat-box code {
+    background-color: #2f4f4f;
+    /* Dark Slate Gray for Inline Code */
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    color: #ffa07a;
+    /* Warm Light Salmon for Inline Code Text */
+}
+
+.chat-box pre {
+    background-color: #2f4f4f;
+    /* Dark Slate Gray for Code Blocks */
+    padding: 1em;
+    border-radius: 4px;
+    color: #ffa07a;
+    /* Warm Light Salmon for Code Blocks Text */
+}
+
+.chat-box a {
+    color: #f34960;
+    /* Warm Gold for Links */
+    text-decoration: none;
+}
+
+.chat-box a:hover {
+    text-decoration: underline;
+    color: #ff6347;
+    /* Warm Tomato for Hovered Links */
+}
+
+.chat-box img {
+    max-width: 100%;
+    height: auto;
 }
