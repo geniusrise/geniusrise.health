@@ -10,13 +10,21 @@ function FeatureL1() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
+    // chat history
     const [chats, setChats] = useState([]);
     const [currentMessage, setCurrentMessage] = useState('');
+
+    // bot typing waits
     const [botIsTyping, setBotIsTyping] = useState(false);
     const chatBoxRef = useRef(null);
+
+    // all api responses
     const [apiResponses, setApiResponses] = useState({});
+
+    // demographics
     const [demographics, setDemographics] = useState({});
     const [currentQuestion, setCurrentQuestion] = useState(null);
+    const [waitForAnswer, setWaitForAnswer] = useState(false);
 
     useEffect(() => {
         addBotMessage(`### Hello! 👋
@@ -70,26 +78,29 @@ So, what brings you here today?
     const askDemographicQuestion = (question, key) => {
         addBotMessage(question, () => {
             setCurrentQuestion(key);
+            setWaitForAnswer(true); // Set the flag to true after asking a question
         });
     };
 
     useEffect(() => {
-        if (currentQuestion === 'name') {
-            askDemographicQuestion('How old are you?', 'age');
-        } else if (currentQuestion === 'age') {
-            askDemographicQuestion('What is your gender?', 'gender');
-        } else if (currentQuestion === 'gender') {
-            // All questions have been asked
-            addBotMessage(`Thank you for providing your details. We can proceed now.`);
+        if (currentQuestion && !waitForAnswer) {
+            // Check the flag here
+            if (currentQuestion === 'name') {
+                askDemographicQuestion('How old are you?', 'age');
+            } else if (currentQuestion === 'age') {
+                askDemographicQuestion('What is your gender?', 'gender');
+            } else if (currentQuestion === 'gender') {
+                addBotMessage(`Thank you for providing your details. We can proceed now.`);
+            }
         }
-    }, [demographics]);
+    }, [currentQuestion, waitForAnswer]);
 
     const handleDemographicAnswer = (answer) => {
         setDemographics((prevState) => ({
             ...prevState,
             [currentQuestion]: answer,
         }));
-        setCurrentQuestion(null);
+        setWaitForAnswer(false); // Set the flag to false after receiving an answer
     };
 
     const askDemographics = () => {
