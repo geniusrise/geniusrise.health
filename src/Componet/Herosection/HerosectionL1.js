@@ -1,33 +1,217 @@
-import React, { useEffect, useRef, useState } from 'react';
-import './style.css';
+import React, { useEffect, useRef, useState, useCallback } from 'react'
+import './style.css'
+import { Form } from 'react-bulma-components'
+import Markdown from 'react-markdown'
+import axios from 'axios'
 
-import { Form } from 'react-bulma-components';
-import Markdown from 'react-markdown';
-import axios from 'axios';
+const QuestionTypes = {
+    INITIAL: 'initial',
+    DEMOGRAPHIC: 'demographic',
+    FOLLOW_UP: 'follow_up',
+}
 
 function Herosection1() {
-    // chat history
-    const [chats, setChats] = useState([]);
-    const [currentMessage, setCurrentMessage] = useState('');
+    const [chats, setChats] = useState([])
 
-    // bot typing waits
-    const [botIsTyping, setBotIsTyping] = useState(false);
-    const chatBoxRef = useRef(null);
+    const [botIsTyping, setBotIsTyping] = useState(false)
+    const [apiResponses, setApiResponses] = useState({})
+    const [currentMessage, setCurrentMessage] = useState('')
+    var [currentState, setCurrentState] = useState(-1)
 
-    // all api responses
-    const [apiResponses, setApiResponses] = useState({});
+    // const [demographics, setDemographics] = useState({})
+    // const [followUpQuestions, setFollowUpQuestions] = useState([])
+    // const [currentQuestion, setCurrentQuestion] = useState(null)
+    // const [waitForAnswer, setWaitForAnswer] = useState(false)
 
-    // demographics
-    const [demographics, setDemographics] = useState({});
-    const [currentQuestion, setCurrentQuestion] = useState(null);
-    const [waitForAnswer, setWaitForAnswer] = useState(false);
+    const chatBoxRef = useRef(null)
 
-    // follow-up questions
-    const [followUpQuestions, setFollowUpQuestions] = useState([]);
-    const [currentFollowUpQuestionIndex, setCurrentFollowUpQuestionIndex] = useState(null);
+    /////////////////////////////// OUTPUT //////////////////////////////////////////
 
-    useEffect(() => {
-        addBotMessage(`### Hello! 👋
+    // add a chat message as a bot
+    const addBotMessage = useCallback((message, callback) => {
+        // save the message we are about to output
+        setChats((prevChats) => [...prevChats, { who: 'bot', message: '' }])
+
+        // simulate as if we were typing the message
+        simulateBotTyping(message, callback)
+    }, [])
+
+    // simulate as if we were stream-typing the message
+    const simulateBotTyping = useCallback((botMessage, callback) => {
+        // setBotIsTyping(true)
+        let i = 0
+        let tempMessage = ''
+        const typing = setInterval(() => {
+            if (i < botMessage.length) {
+                tempMessage += botMessage[i]
+                setChats((prevChats) => {
+                    const newChats = [...prevChats]
+                    newChats[newChats.length - 1].message = tempMessage
+                    return newChats
+                })
+                i++
+            } else {
+                clearInterval(typing)
+                // setBotIsTyping(false)
+                if (callback) {
+                    callback()
+                }
+            }
+        }, 1)
+    }, [])
+
+    /////////////////////////////// APIs //////////////////////////////////////////
+
+    const fetchSymptoms = async (userInput) => {
+        try {
+            const response = await axios.post(
+                'http://localhost:2180/api/v1/ner',
+                { user_input: userInput },
+                { headers: { 'Content-Type': 'application/json' } }
+            )
+
+            setApiResponses((prevState) => ({
+                ...prevState,
+                symptoms: response.data,
+            }))
+
+            fetchSemanticSearch(userInput, response.data.symptoms_diseases)
+
+            const symptomsList = Array.from(new Set(response.data.symptoms_diseases))
+                .map((symptom) => `- ${symptom}`)
+                .join('\n')
+
+            return `#### Identified symptoms:
+
+${symptomsList}
+
+I will now ask you a series of questions based on your symptoms, starting from basic demographics.
+
+Okay to proceed?`
+        } catch (error) {
+            console.error('Error fetching symptoms:', error)
+            return 'Sorry, I encountered an error while fetching your symptoms. Please try again.'
+        }
+    }
+
+    const fetchSemanticSearch = async (userInput, symptoms_diseases) => {
+        try {
+            const response = await axios.post(
+                'http://localhost:2180/api/v1/semantic_search',
+                {
+                    user_input: userInput,
+                    symptoms_diseases: symptoms_diseases,
+                    semantic_similarity_cutoff: 0.9,
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            )
+
+            setApiResponses((prevState) => ({
+                ...prevState,
+                semanticSearch: response.data,
+            }))
+        } catch (error) {
+            console.error('Error fetching semantic search:', error)
+        }
+    }
+
+    const fetchFollowUpQuestions = async (msg, responses) => {
+        try {
+            console.log(responses)
+
+            const symptoms_diseases = responses.symptoms.symptoms_diseases
+            const snomed_concept_ids = responses.semanticSearch.snomed_concept_ids
+
+            const response = await axios.post(
+                'http://localhost:2180/api/v1/follow_up',
+                {
+                    symptoms_diseases: symptoms_diseases,
+                    snomed_concept_ids: snomed_concept_ids,
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            )
+
+            setApiResponses((prevState) => ({
+                ...prevState,
+                follow_up: response.data,
+            }))
+
+            const followUpQuestions = Array.from(new Set(response.data.map((x) => x.questions).flat()))
+
+            // questionStateMachine.pop()
+            // setCurrentState(currentState - 1)
+            const newStates = followUpQuestions.map((question) => ({
+                type: QuestionTypes.FOLLOW_UP,
+                question: question,
+                answer: null,
+            }))
+
+            setQuestionStateMachine((prevStateMachine) => [...prevStateMachine, ...newStates])
+
+            console.log(followUpQuestions)
+            console.log(questionStateMachine)
+
+            return `Thanks, now lets proceed with some questions about your symptoms.
+
+Shall we proceed?
+`
+        } catch (error) {
+            console.error('Error fetching follow-up questions:', error)
+            return 'Sorry, I encountered an error while fetching follow-up questions. Please try again.'
+        }
+    }
+
+    const generateSummaryReport = async (responses) => {
+        try {
+            const snomed_concept_ids = responses.semanticSearch.snomed_concept_ids
+            const symptoms_diseases = responses.symptoms.symptoms_diseases
+
+            // Prepare the questions and answers object
+            const qa = {}
+            questionStateMachine.forEach((state) => {
+                if (state.answer && state.type == QuestionTypes.FOLLOW_UP) {
+                    qa[state.question] = state.answer
+                }
+            })
+
+            // Send a request to the summary report API
+            const response = await axios.post(
+                'http://localhost:2180/api/v1/summary',
+                {
+                    snomed_concept_ids: snomed_concept_ids,
+                    symptoms_diseases: symptoms_diseases,
+                    qa: qa,
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            )
+
+            // Process and display the summary report
+            const summaryReport = response.data.summary
+            addBotMessage(summaryReport)
+        } catch (error) {
+            console.error('Error generating summary report:', error)
+            addBotMessage('Sorry, I encountered an error while generating your summary report. Please try again.')
+        }
+    }
+
+    /////////////////////////////// STATE MACHINE //////////////////////////////////////////
+
+    const [questionStateMachine, setQuestionStateMachine] = useState([
+        {
+            type: QuestionTypes.INITIAL,
+            question: `### Hello! 👋
 
 I'm your health assistant at geniusrise.health. I'm here to guide you to the right care, quickly.
 
@@ -37,234 +221,114 @@ Here's how it works:
 2. **Quick Questions**: I'll gather some basic info and ask about your symptoms.
 3. **Next Steps**: You'll receive a preliminary report for your doctor and a department recommendation.
 
-So, what brings you here today?
-`);
-    }, []);
+So, what brings you here today?`,
+            answer: null,
+        },
+        {
+            type: QuestionTypes.INITIAL,
+            question: null,
+            answer: null,
+            action: fetchSymptoms,
+        },
+        {
+            type: QuestionTypes.DEMOGRAPHIC,
+            question: 'What is your name?',
+            answer: null,
+        },
+        {
+            type: QuestionTypes.DEMOGRAPHIC,
+            question: 'How old are you?',
+            answer: null,
+        },
+        {
+            type: QuestionTypes.DEMOGRAPHIC,
+            question: 'What is your gender?',
+            answer: null,
+        },
+        {
+            type: QuestionTypes.FOLLOW_UP,
+            question: null,
+            answer: null,
+            action: fetchFollowUpQuestions,
+        },
+    ])
 
-    useEffect(() => {
-        if (chatBoxRef.current) {
-            chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
-        }
-    }, [chats]);
+    const transition = async (incomingMsg) => {
+        let msg = incomingMsg // Rename msg to incomingMsg to avoid shadowing and confusion
 
-    const addBotMessage = (message, callback) => {
-        setChats((prevChats) => [...prevChats, { who: 'bot', message: '' }]);
-        simulateBotTyping(message, callback);
-    };
+        if (currentState === -1) {
+            setCurrentState(0)
+            const question = questionStateMachine[0].question
+            addBotMessage(question)
+        } else if (currentState < questionStateMachine.length - 1) {
+            console.log(msg)
+            setQuestionStateMachine((prevStateMachine) => {
+                const updatedStateMachine = [...prevStateMachine]
+                updatedStateMachine[currentState].answer = msg
+                return updatedStateMachine
+            })
 
-    const simulateBotTyping = (botMessage, callback) => {
-        setBotIsTyping(true);
-        let i = 0;
-        let tempMessage = '';
-        const typing = setInterval(() => {
-            if (i < botMessage.length) {
-                tempMessage += botMessage[i];
-                setChats((prevChats) => {
-                    const newChats = [...prevChats];
-                    newChats[newChats.length - 1].message = tempMessage;
-                    return newChats;
-                });
-                i++;
-            } else {
-                clearInterval(typing);
-                setBotIsTyping(false);
-                if (callback) {
-                    callback();
-                }
+            // console.log("*********************************************************************************")
+            // console.log(currentState + 1)
+            // console.log(questionStateMachine[currentState + 1])
+
+            if (
+                questionStateMachine[currentState + 1].type == QuestionTypes.INITIAL &&
+                questionStateMachine[currentState + 1].action
+            ) {
+                const result = await questionStateMachine[currentState + 1].action(msg)
+                questionStateMachine[currentState + 1].question = result
+            } else if (
+                questionStateMachine[currentState + 1].type == QuestionTypes.FOLLOW_UP &&
+                questionStateMachine[currentState + 1].action
+            ) {
+                const result = await questionStateMachine[currentState + 1].action(msg, apiResponses)
+                questionStateMachine[currentState + 1].question = result
             }
-        }, 10);
-    };
+            // console.log(currentState + 1)
+            // console.log(questionStateMachine[currentState + 1])
+            // console.log(apiResponses)
+            // console.log("*********************************************************************************")
 
-    /////////////////////////////// FOLLOW UP //////////////////////////////////////////
-
-    const fetchFollowUpQuestions = async () => {
-        try {
-            const { snomed_concepts } = apiResponses.semanticSearch;
-            const { symptoms_diseases } = apiResponses.symptoms;
-            const response = await axios.post(
-                'http://localhost:2180/api/v1/follow_up',
-                {
-                    symptoms_diseases,
-                    snomed_concept_ids: snomed_concepts,
-                },
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                }
-            );
-            setFollowUpQuestions(response.data);
-            setCurrentFollowUpQuestionIndex(0);
-        } catch (error) {
-            console.error('Error fetching follow-up questions:', error);
-            addBotMessage('Sorry, I encountered an error while fetching follow-up questions. Please try again.');
+            msg = questionStateMachine[currentState + 1].question
+            setCurrentState(currentState + 1)
+            addBotMessage(msg)
+        } else {
+            await generateSummaryReport(apiResponses)
         }
-    };
+    }
 
-    const askFollowUpQuestion = () => {
-        if (currentFollowUpQuestionIndex !== null && currentFollowUpQuestionIndex < followUpQuestions.length) {
-            const questionSet = followUpQuestions[currentFollowUpQuestionIndex];
-            addBotMessage(questionSet.questions[0], () => {
-                setWaitForAnswer(true);
-            });
-        }
-    };
+    // useEffect(() => {
+    //     console.log(apiResponses)
+    // }, [apiResponses])
 
-    useEffect(() => {
-        if (currentFollowUpQuestionIndex !== null && !waitForAnswer) {
-            askFollowUpQuestion();
-        }
-    }, [currentFollowUpQuestionIndex, waitForAnswer]);
-
-    const handleFollowUpAnswer = (answer) => {
-        // Store the answer (you can modify this part to store the answer as you like)
-        setWaitForAnswer(false);
-        setCurrentFollowUpQuestionIndex((prevIndex) => prevIndex + 1);
-    };
-
-    /////////////////////////////// DEMOGRAPHICS //////////////////////////////////////////
-
-    const askDemographicQuestion = (question, key) => {
-        addBotMessage(question, () => {
-            setCurrentQuestion(key);
-            setWaitForAnswer(true); // Set the flag to true after asking a question
-        });
-    };
-
-    useEffect(() => {
-        if (currentQuestion && !waitForAnswer) {
-            // Check the flag here
-            if (currentQuestion === 'name') {
-                askDemographicQuestion('How old are you?', 'age');
-            } else if (currentQuestion === 'age') {
-                askDemographicQuestion('What is your gender?', 'gender');
-            } else if (currentQuestion === 'gender') {
-                addBotMessage(`Thank you for providing your details. We can proceed now.`);
-            }
-        }
-    }, [currentQuestion, waitForAnswer]);
-
-    const handleDemographicAnswer = (answer) => {
-        setDemographics((prevState) => ({
-            ...prevState,
-            [currentQuestion]: answer,
-        }));
-        setWaitForAnswer(false); // Set the flag to false after receiving an answer
-    };
-
-    const askDemographics = () => {
-        askDemographicQuestion('What is your name?', 'name');
-    };
-
-    /////////////////////////////// APIs //////////////////////////////////////////
-
-    const fetchSymptoms = async (userInput) => {
-        try {
-            const response = await axios.post(
-                'http://localhost:2180/api/v1/ner',
-                {
-                    user_input: userInput,
-                },
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                }
-            );
-
-            const { symptoms_diseases } = response.data;
-            setApiResponses((prevState) => ({
-                ...prevState,
-                symptoms: response.data,
-            }));
-            const uniqueSymptoms = Array.from(new Set(symptoms_diseases));
-            const formattedSymptoms = uniqueSymptoms.join(', ');
-
-            addBotMessage(
-                `I've identified the following unique symptoms and diseases based on your input: ${formattedSymptoms}`,
-                () => {
-                    fetchSemanticSearch(userInput, symptoms_diseases).then(() => {
-                        askDemographics(); // Start asking demographic questions after fetchSemanticSearch is done
-                    });
-                }
-            );
-        } catch (error) {
-            console.error('Error fetching symptoms:', error);
-            addBotMessage('Sorry, I encountered an error while fetching your symptoms. Please try again.');
-        }
-    };
-
-    const fetchSemanticSearch = async (userInput, symptoms_diseases) => {
-        try {
-            const response = await axios.post(
-                'http://localhost:2180/api/v1/semantic_search',
-                {
-                    user_input: userInput,
-                    symptoms_diseases,
-                    semantic_similarity_cutoff: 0.9,
-                },
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                }
-            );
-
-            const { snomed_concepts } = response.data;
-            setApiResponses((prevState) => ({
-                ...prevState,
-                semanticSearch: response.data,
-            }));
-            const allConcepts = snomed_concepts.flat();
-            const uniqueConcepts = Array.from(new Set(allConcepts));
-            const formattedConcepts = uniqueConcepts.join(', ');
-            // addBotMessage(`Based on semantic search, the following unique concepts are related to your symptoms: ${formattedConcepts}`);
-        } catch (error) {
-            console.error('Error fetching semantic search:', error);
-            addBotMessage('Sorry, I encountered an error while performing semantic search. Please try again.');
-        }
-    };
-
-    /////////////////////////////// USER INPUT //////////////////////////////////////////
-
-    const handleKeyDown = (e) => {
-        if (e.key === 'Enter' && !botIsTyping) {
-            e.preventDefault();
+    const handleKeyDown = async (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault()
             if (e.shiftKey) {
-                setCurrentMessage((prevMessage) => `${prevMessage}\n`);
+                setCurrentMessage((prevMessage) => `${prevMessage}\n`)
             } else {
-                setChats([...chats, { who: 'user', message: currentMessage }]);
-
-                if (currentQuestion) {
-                    handleDemographicAnswer(currentMessage);
-                } else if (currentFollowUpQuestionIndex !== null) {
-                    handleFollowUpAnswer(currentMessage);
-                } else {
-                    const lowerCaseMessage = currentMessage.toLowerCase().trim();
-                    if (lowerCaseMessage === 'hi' || lowerCaseMessage === 'hello' || lowerCaseMessage === 'hey') {
-                        addBotMessage('Hi there! How can I assist you today?');
-                    } else if (currentMessage.split(' ').length < 3) {
-                        addBotMessage('Could you please provide more details?');
-                    } else {
-                        fetchSymptoms(currentMessage);
-                    }
-                }
-
-                setCurrentMessage('');
+                setChats((prevChats) => [...prevChats, { who: 'user', message: currentMessage }])
+                setCurrentMessage('')
+                await transition(currentMessage)
             }
         }
-    };
+    }
+
+    useEffect(async () => {
+        await transition('')
+    }, [])
 
     return (
         <>
             <section className="hero-banner position-relative custom-py-0 hero-shape1">
                 <div className="container">
                     <div className="row align-items-center">
-                        <div className="col-12 col-lg-5 col-xl-6 order-lg-1 mb-8 mb-lg-0">
+                        <div className="col-12 col-lg-6 col-xl-6 order-lg-1 mb-8 mb-lg-0">
                             {/* <!-- Image --> */}
                             <img src={require('../../assets/images/connectome1.png')} className="img-fluid" alt="..." />
                         </div>
-                        <div className="col-12 col-lg-7 col-xl-6">
+                        <div className="col-12 col-lg-6 col-xl-6">
                             <div className="chat-window">
                                 <Form.Field>
                                     <Form.Label className="text-dark text-center">
@@ -297,7 +361,7 @@ So, what brings you here today?
                                         value={currentMessage}
                                         disabled={botIsTyping}
                                         onChange={(e) => {
-                                            return setCurrentMessage(e.target.value);
+                                            return setCurrentMessage(e.target.value)
                                         }}
                                         onKeyDown={handleKeyDown}
                                     />
@@ -310,7 +374,7 @@ So, what brings you here today?
                 {/* <!-- / .container --> */}
             </section>
         </>
-    );
+    )
 }
 
-export default Herosection1;
+export default Herosection1

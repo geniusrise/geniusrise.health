@@ -13,7 +13,7 @@
 .chat-box {
     height: 30rem;
     overflow-y: scroll;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 
 .chat-window textarea {
