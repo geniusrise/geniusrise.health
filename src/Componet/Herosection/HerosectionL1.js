@@ -17,6 +17,7 @@ function Herosection1() {
     const [apiResponses, setApiResponses] = useState({})
     const [currentMessage, setCurrentMessage] = useState("")
     var [currentState, setCurrentState] = useState(-1)
+    const [graphImage, setGraphImage] = useState(null);
 
     // const [demographics, setDemographics] = useState({})
     // const [followUpQuestions, setFollowUpQuestions] = useState([])
@@ -50,6 +51,9 @@ function Herosection1() {
         // setBotIsTyping(true)
         let i = 0
         let tempMessage = ""
+
+        if (botMessage == null) botMessage = "Looks like there was an error, please try again."
+
         const typing = setInterval(() => {
             if (i < botMessage.length) {
                 tempMessage += botMessage[i]
@@ -74,7 +78,7 @@ function Herosection1() {
     const fetchSymptoms = async (userInput) => {
         try {
             const response = await axios.post(
-                "https://api.geniusrise.health/api/v1/ner",
+                "http://localhost:2180/api/v1/ner",
                 { user_input: userInput },
                 { headers: { "Content-Type": "application/json" } }
             )
@@ -106,7 +110,7 @@ Okay to proceed?`
     const fetchSemanticSearch = async (userInput, symptoms_diseases) => {
         try {
             const response = await axios.post(
-                "https://api.geniusrise.health/api/v1/semantic_search",
+                "http://localhost:2180/api/v1/semantic_search",
                 {
                     user_input: userInput,
                     symptoms_diseases: symptoms_diseases,
@@ -130,13 +134,12 @@ Okay to proceed?`
 
     const fetchFollowUpQuestions = async (msg, responses) => {
         try {
-            console.log(responses)
 
             const symptoms_diseases = responses.symptoms.symptoms_diseases
             const snomed_concept_ids = responses.semanticSearch.snomed_concept_ids
 
             const response = await axios.post(
-                "https://api.geniusrise.health/api/v1/follow_up",
+                "http://localhost:2180/api/v1/follow_up",
                 {
                     symptoms_diseases: symptoms_diseases,
                     snomed_concept_ids: snomed_concept_ids,
@@ -165,9 +168,6 @@ Okay to proceed?`
 
             setQuestionStateMachine((prevStateMachine) => [...prevStateMachine, ...newStates])
 
-            console.log(followUpQuestions)
-            console.log(questionStateMachine)
-
             return `Thanks, now lets proceed with some questions about your symptoms.
 
 Shall we proceed?
@@ -184,16 +184,18 @@ Shall we proceed?
             const symptoms_diseases = responses.symptoms.symptoms_diseases
 
             // Prepare the questions and answers object
+            console.log(responses)
             const qa = {}
             questionStateMachine.forEach((state) => {
-                if (state.answer && state.type == QuestionTypes.FOLLOW_UP) {
+                if ((state.question != null && state.answer != null && state.type == QuestionTypes.FOLLOW_UP) ||
+                (state.question != null && state.answer != null && state.type == QuestionTypes.DEMOGRAPHIC)) {
                     qa[state.question] = state.answer
                 }
             })
 
             // Send a request to the summary report API
             const response = await axios.post(
-                "https://api.geniusrise.health/api/v1/summary",
+                "http://localhost:2180/api/v1/summary",
                 {
                     snomed_concept_ids: snomed_concept_ids,
                     symptoms_diseases: symptoms_diseases,
@@ -207,13 +209,42 @@ Shall we proceed?
             )
 
             // Process and display the summary report
-            const summaryReport = response.data.summary
+            const summaryReport = response.data.summary + "\n" + response.data.speciality
             addBotMessage(summaryReport)
         } catch (error) {
             console.error("Error generating summary report:", error)
             addBotMessage("Sorry, I encountered an error while generating your summary report. Please try again.")
         }
     }
+
+    const fetchGraph = async (responses) => {
+        try {
+            const response = await axios.post(
+                "http://localhost:2180/api/v1/graph",
+                {
+                    snomed_concepts: responses.semanticSearch.snomed_concept_ids
+                },
+                {
+                    headers: { "Content-Type": "application/json" },
+                    responseType: "arraybuffer"
+                }
+            );
+
+            const text = new TextDecoder("utf-8").decode(new Uint8Array(response.data));
+
+            // Find the start and end index of the base64 image data
+            const base64Start = text.indexOf("Content-Transfer-Encoding: base64") + "Content-Transfer-Encoding: base64".length;
+            const base64End = text.indexOf("--", base64Start); // Assuming the next boundary starts with '--'
+
+            if (base64Start !== -1 && base64End !== -1) {
+                const base64Image = text.substring(base64Start, base64End).trim();
+                const cleanedBase64Image = base64Image.replace(/\s/g, ''); // Remove all white spaces
+                setGraphImage(`data:image/png;base64,${cleanedBase64Image}`);
+            }
+        } catch (error) {
+            console.error("Error fetching graph:", error);
+        }
+    };
 
     /////////////////////////////// STATE MACHINE //////////////////////////////////////////
 
@@ -263,7 +294,7 @@ So, what brings you here today?`,
     ])
 
     const transition = async (incomingMsg) => {
-        let msg = incomingMsg // Rename msg to incomingMsg to avoid shadowing and confusion
+        const msg = incomingMsg // Rename msg to incomingMsg to avoid shadowing and confusion
 
         if (currentState === -1) {
             setCurrentState(0)
@@ -283,13 +314,13 @@ So, what brings you here today?`,
 
             if (
                 questionStateMachine[currentState + 1].type == QuestionTypes.INITIAL &&
-                questionStateMachine[currentState + 1].action
+                questionStateMachine[currentState + 1].action != null
             ) {
                 const result = await questionStateMachine[currentState + 1].action(msg)
                 questionStateMachine[currentState + 1].question = result
             } else if (
                 questionStateMachine[currentState + 1].type == QuestionTypes.FOLLOW_UP &&
-                questionStateMachine[currentState + 1].action
+                questionStateMachine[currentState + 1].action != null
             ) {
                 const result = await questionStateMachine[currentState + 1].action(msg, apiResponses)
                 questionStateMachine[currentState + 1].question = result
@@ -299,11 +330,14 @@ So, what brings you here today?`,
             // console.log(apiResponses)
             // console.log("*********************************************************************************")
 
-            msg = questionStateMachine[currentState + 1].question
+            const nextMsg = questionStateMachine[currentState + 1].question
             setCurrentState(currentState + 1)
-            addBotMessage(msg)
+            if (nextMsg) {
+                addBotMessage(nextMsg)
+            }
         } else {
             await generateSummaryReport(apiResponses)
+            await fetchGraph(apiResponses)
         }
     }
 
@@ -318,8 +352,9 @@ So, what brings you here today?`,
                 setCurrentMessage((prevMessage) => `${prevMessage}\n`)
             } else {
                 setChats((prevChats) => [...prevChats, { who: "user", message: currentMessage }])
+                const msg = currentMessage
                 setCurrentMessage("")
-                await transition(currentMessage)
+                await transition(msg)
             }
         }
     }
@@ -335,7 +370,7 @@ So, what brings you here today?`,
                     <div className="row align-items-center">
                         <div className="col-12 col-lg-6 col-xl-6 order-lg-1 mb-8 mb-lg-0">
                             {/* <!-- Image --> */}
-                            <img src={require("../../assets/images/connectome1.png")} className="img-fluid" alt="..." />
+                            <img src={graphImage || require("../../assets/images/connectome1.png")} className="img-fluid" alt="..." />
                         </div>
                         <div className="col-12 col-lg-6 col-xl-6">
                             <div className="chat-window">
