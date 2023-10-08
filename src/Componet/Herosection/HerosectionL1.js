@@ -66,7 +66,7 @@ function Herosection1() {
                     callback()
                 }
             }
-        }, 1)
+        }, 10)
     }, [])
 
     /////////////////////////////// APIs //////////////////////////////////////////
@@ -74,7 +74,7 @@ function Herosection1() {
     const fetchSymptoms = async (userInput) => {
         try {
             const response = await axios.post(
-                "http://localhost:2180/api/v1/ner",
+                "https://api.geniusrise.health/api/v1/ner",
                 { user_input: userInput },
                 { headers: { "Content-Type": "application/json" } }
             )
@@ -106,7 +106,7 @@ Okay to proceed?`
     const fetchSemanticSearch = async (userInput, symptoms_diseases) => {
         try {
             const response = await axios.post(
-                "http://localhost:2180/api/v1/semantic_search",
+                "https://api.geniusrise.health/api/v1/semantic_search",
                 {
                     user_input: userInput,
                     symptoms_diseases: symptoms_diseases,
@@ -136,7 +136,7 @@ Okay to proceed?`
             const snomed_concept_ids = responses.semanticSearch.snomed_concept_ids
 
             const response = await axios.post(
-                "http://localhost:2180/api/v1/follow_up",
+                "https://api.geniusrise.health/api/v1/follow_up",
                 {
                     symptoms_diseases: symptoms_diseases,
                     snomed_concept_ids: snomed_concept_ids,
@@ -193,7 +193,7 @@ Shall we proceed?
 
             // Send a request to the summary report API
             const response = await axios.post(
-                "http://localhost:2180/api/v1/summary",
+                "https://api.geniusrise.health/api/v1/summary",
                 {
                     snomed_concept_ids: snomed_concept_ids,
                     symptoms_diseases: symptoms_diseases,
