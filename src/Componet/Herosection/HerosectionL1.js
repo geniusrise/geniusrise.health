@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react'
-import './style.css'
-import { Form } from 'react-bulma-components'
-import Markdown from 'react-markdown'
-import axios from 'axios'
+import React, { useEffect, useRef, useState, useCallback } from "react"
+import "./style.css"
+import { Form } from "react-bulma-components"
+import Markdown from "react-markdown"
+import axios from "axios"
 
 const QuestionTypes = {
-    INITIAL: 'initial',
-    DEMOGRAPHIC: 'demographic',
-    FOLLOW_UP: 'follow_up',
+    INITIAL: "initial",
+    DEMOGRAPHIC: "demographic",
+    FOLLOW_UP: "follow_up",
 }
 
 function Herosection1() {
@@ -15,7 +15,7 @@ function Herosection1() {
 
     const [botIsTyping, setBotIsTyping] = useState(false)
     const [apiResponses, setApiResponses] = useState({})
-    const [currentMessage, setCurrentMessage] = useState('')
+    const [currentMessage, setCurrentMessage] = useState("")
     var [currentState, setCurrentState] = useState(-1)
 
     // const [demographics, setDemographics] = useState({})
@@ -24,13 +24,22 @@ function Herosection1() {
     // const [waitForAnswer, setWaitForAnswer] = useState(false)
 
     const chatBoxRef = useRef(null)
+    const scrollToBottom = () => {
+        const chatBox = chatBoxRef.current
+        if (chatBox) {
+            chatBox.scrollTop = chatBox.scrollHeight
+        }
+    }
+    useEffect(() => {
+        scrollToBottom()
+    }, [chats])
 
     /////////////////////////////// OUTPUT //////////////////////////////////////////
 
     // add a chat message as a bot
     const addBotMessage = useCallback((message, callback) => {
         // save the message we are about to output
-        setChats((prevChats) => [...prevChats, { who: 'bot', message: '' }])
+        setChats((prevChats) => [...prevChats, { who: "bot", message: "" }])
 
         // simulate as if we were typing the message
         simulateBotTyping(message, callback)
@@ -40,7 +49,7 @@ function Herosection1() {
     const simulateBotTyping = useCallback((botMessage, callback) => {
         // setBotIsTyping(true)
         let i = 0
-        let tempMessage = ''
+        let tempMessage = ""
         const typing = setInterval(() => {
             if (i < botMessage.length) {
                 tempMessage += botMessage[i]
@@ -65,9 +74,9 @@ function Herosection1() {
     const fetchSymptoms = async (userInput) => {
         try {
             const response = await axios.post(
-                'http://localhost:2180/api/v1/ner',
+                "http://localhost:2180/api/v1/ner",
                 { user_input: userInput },
-                { headers: { 'Content-Type': 'application/json' } }
+                { headers: { "Content-Type": "application/json" } }
             )
 
             setApiResponses((prevState) => ({
@@ -79,7 +88,7 @@ function Herosection1() {
 
             const symptomsList = Array.from(new Set(response.data.symptoms_diseases))
                 .map((symptom) => `- ${symptom}`)
-                .join('\n')
+                .join("\n")
 
             return `#### Identified symptoms:
 
@@ -89,15 +98,15 @@ I will now ask you a series of questions based on your symptoms, starting from b
 
 Okay to proceed?`
         } catch (error) {
-            console.error('Error fetching symptoms:', error)
-            return 'Sorry, I encountered an error while fetching your symptoms. Please try again.'
+            console.error("Error fetching symptoms:", error)
+            return "Sorry, I encountered an error while fetching your symptoms. Please try again."
         }
     }
 
     const fetchSemanticSearch = async (userInput, symptoms_diseases) => {
         try {
             const response = await axios.post(
-                'http://localhost:2180/api/v1/semantic_search',
+                "http://localhost:2180/api/v1/semantic_search",
                 {
                     user_input: userInput,
                     symptoms_diseases: symptoms_diseases,
@@ -105,7 +114,7 @@ Okay to proceed?`
                 },
                 {
                     headers: {
-                        'Content-Type': 'application/json',
+                        "Content-Type": "application/json",
                     },
                 }
             )
@@ -115,7 +124,7 @@ Okay to proceed?`
                 semanticSearch: response.data,
             }))
         } catch (error) {
-            console.error('Error fetching semantic search:', error)
+            console.error("Error fetching semantic search:", error)
         }
     }
 
@@ -127,14 +136,14 @@ Okay to proceed?`
             const snomed_concept_ids = responses.semanticSearch.snomed_concept_ids
 
             const response = await axios.post(
-                'http://localhost:2180/api/v1/follow_up',
+                "http://localhost:2180/api/v1/follow_up",
                 {
                     symptoms_diseases: symptoms_diseases,
                     snomed_concept_ids: snomed_concept_ids,
                 },
                 {
                     headers: {
-                        'Content-Type': 'application/json',
+                        "Content-Type": "application/json",
                     },
                 }
             )
@@ -164,8 +173,8 @@ Okay to proceed?`
 Shall we proceed?
 `
         } catch (error) {
-            console.error('Error fetching follow-up questions:', error)
-            return 'Sorry, I encountered an error while fetching follow-up questions. Please try again.'
+            console.error("Error fetching follow-up questions:", error)
+            return "Sorry, I encountered an error while fetching follow-up questions. Please try again."
         }
     }
 
@@ -184,7 +193,7 @@ Shall we proceed?
 
             // Send a request to the summary report API
             const response = await axios.post(
-                'http://localhost:2180/api/v1/summary',
+                "http://localhost:2180/api/v1/summary",
                 {
                     snomed_concept_ids: snomed_concept_ids,
                     symptoms_diseases: symptoms_diseases,
@@ -192,7 +201,7 @@ Shall we proceed?
                 },
                 {
                     headers: {
-                        'Content-Type': 'application/json',
+                        "Content-Type": "application/json",
                     },
                 }
             )
@@ -201,8 +210,8 @@ Shall we proceed?
             const summaryReport = response.data.summary
             addBotMessage(summaryReport)
         } catch (error) {
-            console.error('Error generating summary report:', error)
-            addBotMessage('Sorry, I encountered an error while generating your summary report. Please try again.')
+            console.error("Error generating summary report:", error)
+            addBotMessage("Sorry, I encountered an error while generating your summary report. Please try again.")
         }
     }
 
@@ -232,17 +241,17 @@ So, what brings you here today?`,
         },
         {
             type: QuestionTypes.DEMOGRAPHIC,
-            question: 'What is your name?',
+            question: "What is your name?",
             answer: null,
         },
         {
             type: QuestionTypes.DEMOGRAPHIC,
-            question: 'How old are you?',
+            question: "How old are you?",
             answer: null,
         },
         {
             type: QuestionTypes.DEMOGRAPHIC,
-            question: 'What is your gender?',
+            question: "What is your gender?",
             answer: null,
         },
         {
@@ -303,20 +312,20 @@ So, what brings you here today?`,
     // }, [apiResponses])
 
     const handleKeyDown = async (e) => {
-        if (e.key === 'Enter') {
+        if (e.key === "Enter") {
             e.preventDefault()
             if (e.shiftKey) {
                 setCurrentMessage((prevMessage) => `${prevMessage}\n`)
             } else {
-                setChats((prevChats) => [...prevChats, { who: 'user', message: currentMessage }])
-                setCurrentMessage('')
+                setChats((prevChats) => [...prevChats, { who: "user", message: currentMessage }])
+                setCurrentMessage("")
                 await transition(currentMessage)
             }
         }
     }
 
     useEffect(async () => {
-        await transition('')
+        await transition("")
     }, [])
 
     return (
@@ -326,7 +335,7 @@ So, what brings you here today?`,
                     <div className="row align-items-center">
                         <div className="col-12 col-lg-6 col-xl-6 order-lg-1 mb-8 mb-lg-0">
                             {/* <!-- Image --> */}
-                            <img src={require('../../assets/images/connectome1.png')} className="img-fluid" alt="..." />
+                            <img src={require("../../assets/images/connectome1.png")} className="img-fluid" alt="..." />
                         </div>
                         <div className="col-12 col-lg-6 col-xl-6">
                             <div className="chat-window">
@@ -337,7 +346,7 @@ So, what brings you here today?`,
                                 </Form.Field>
                                 <div className="chat-box" ref={chatBoxRef}>
                                     {chats.map((c, index) =>
-                                        c.who === 'user' ? (
+                                        c.who === "user" ? (
                                             <div className="chat-bubble text-user" key={index}>
                                                 <span className="chat-emoji">
                                                     🙂 <strong>me</strong>
