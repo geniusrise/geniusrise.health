@@ -33,7 +33,7 @@ function Herosection1() {
     }
     useEffect(() => {
         scrollToBottom()
-    }, [chats])
+    }, [chats, botIsTyping])
 
     /////////////////////////////// OUTPUT //////////////////////////////////////////
 
@@ -76,9 +76,11 @@ function Herosection1() {
     /////////////////////////////// APIs //////////////////////////////////////////
 
     const fetchSymptoms = async (userInput) => {
+        setBotIsTyping(true)
+
         try {
             const response = await axios.post(
-                "http://localhost:2180/api/v1/ner",
+                "https://yauiuxmk8rlxkj-2180.proxy.runpod.net/api/v1/ner",
                 { user_input: userInput },
                 { headers: { "Content-Type": "application/json" } }
             )
@@ -88,12 +90,13 @@ function Herosection1() {
                 symptoms: response.data,
             }))
 
-            fetchSemanticSearch(userInput, response.data.symptoms_diseases)
+            await fetchSemanticSearch(userInput, response.data.symptoms_diseases)
 
             const symptomsList = Array.from(new Set(response.data.symptoms_diseases))
                 .map((symptom) => `- ${symptom}`)
                 .join("\n")
 
+            setBotIsTyping(false)
             return `#### Identified symptoms:
 
 ${symptomsList}
@@ -103,14 +106,18 @@ I will now ask you a series of questions based on your symptoms, starting from b
 Okay to proceed?`
         } catch (error) {
             console.error("Error fetching symptoms:", error)
+            setBotIsTyping(false)
             return "Sorry, I encountered an error while fetching your symptoms. Please try again."
         }
+
     }
 
     const fetchSemanticSearch = async (userInput, symptoms_diseases) => {
+        setBotIsTyping(true)
+
         try {
             const response = await axios.post(
-                "http://localhost:2180/api/v1/semantic_search",
+                "https://yauiuxmk8rlxkj-2180.proxy.runpod.net/api/v1/semantic_search",
                 {
                     user_input: userInput,
                     symptoms_diseases: symptoms_diseases,
@@ -127,19 +134,23 @@ Okay to proceed?`
                 ...prevState,
                 semanticSearch: response.data,
             }))
+            setBotIsTyping(false)
         } catch (error) {
+            setBotIsTyping(false)
             console.error("Error fetching semantic search:", error)
         }
     }
 
     const fetchFollowUpQuestions = async (msg, responses) => {
+        setBotIsTyping(true)
+
         try {
 
             const symptoms_diseases = responses.symptoms.symptoms_diseases
             const snomed_concept_ids = responses.semanticSearch.snomed_concept_ids
 
             const response = await axios.post(
-                "http://localhost:2180/api/v1/follow_up",
+                "https://yauiuxmk8rlxkj-2180.proxy.runpod.net/api/v1/follow_up",
                 {
                     symptoms_diseases: symptoms_diseases,
                     snomed_concept_ids: snomed_concept_ids,
@@ -168,17 +179,22 @@ Okay to proceed?`
 
             setQuestionStateMachine((prevStateMachine) => [...prevStateMachine, ...newStates])
 
+            setBotIsTyping(false)
             return `Thanks, now lets proceed with some questions about your symptoms.
 
 Shall we proceed?
 `
         } catch (error) {
             console.error("Error fetching follow-up questions:", error)
+            setBotIsTyping(false)
             return "Sorry, I encountered an error while fetching follow-up questions. Please try again."
         }
+
     }
 
     const generateSummaryReport = async (responses) => {
+        setBotIsTyping(true)
+
         try {
             const snomed_concept_ids = responses.semanticSearch.snomed_concept_ids
             const symptoms_diseases = responses.symptoms.symptoms_diseases
@@ -195,7 +211,7 @@ Shall we proceed?
 
             // Send a request to the summary report API
             const response = await axios.post(
-                "http://localhost:2180/api/v1/summary",
+                "https://yauiuxmk8rlxkj-2180.proxy.runpod.net/api/v1/summary",
                 {
                     snomed_concept_ids: snomed_concept_ids,
                     symptoms_diseases: symptoms_diseases,
@@ -210,9 +226,11 @@ Shall we proceed?
 
             // Process and display the summary report
             const summaryReport = response.data.summary + "\n" + response.data.speciality
+            setBotIsTyping(false)
             addBotMessage(summaryReport)
         } catch (error) {
             console.error("Error generating summary report:", error)
+            setBotIsTyping(false)
             addBotMessage("Sorry, I encountered an error while generating your summary report. Please try again.")
         }
     }
@@ -220,7 +238,7 @@ Shall we proceed?
     const fetchGraph = async (responses) => {
         try {
             const response = await axios.post(
-                "http://localhost:2180/api/v1/graph",
+                "https://yauiuxmk8rlxkj-2180.proxy.runpod.net/api/v1/graph",
                 {
                     snomed_concepts: responses.semanticSearch.snomed_concept_ids
                 },
@@ -396,6 +414,13 @@ So, what brings you here today?`,
                                                 <Markdown>{c.message}</Markdown>
                                             </div>
                                         )
+                                    )}
+                                    {botIsTyping && (
+                                        <div className="chat-bubble text-bot">
+                                            <span className="chat-emoji">
+                                                🙋‍♂️ <strong>genius </strong>
+                                            </span> is thinking...
+                                        </div>
                                     )}
                                 </div>
                                 <Form.Field>
