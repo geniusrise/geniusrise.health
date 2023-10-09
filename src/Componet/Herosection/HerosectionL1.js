@@ -367,8 +367,8 @@ So, what brings you here today?`,
         if (e.key === "Enter") {
             e.preventDefault()
 
-            if (currentMessage.length < 10) {
-                addBotMessage("Please input more than 10 characters.")
+            if (currentMessage.length <= 3) {
+                addBotMessage("Please input more than 3 characters.")
                 return
             }
 
