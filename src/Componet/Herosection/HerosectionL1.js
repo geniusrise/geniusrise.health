@@ -80,7 +80,7 @@ function Herosection1() {
 
         try {
             const response = await axios.post(
-                "http://localhost:2180/api/v1/ner",
+                "https://yauiuxmk8rlxkj-2180.proxy.runpod.net/api/v1/ner",
                 { user_input: userInput },
                 { headers: { "Content-Type": "application/json" } }
             )
@@ -117,7 +117,7 @@ Okay to proceed?`
 
         try {
             const response = await axios.post(
-                "http://localhost:2180/api/v1/semantic_search",
+                "https://yauiuxmk8rlxkj-2180.proxy.runpod.net/api/v1/semantic_search",
                 {
                     user_input: userInput,
                     symptoms_diseases: symptoms_diseases,
@@ -150,7 +150,7 @@ Okay to proceed?`
             const snomed_concept_ids = responses.semanticSearch.snomed_concept_ids
 
             const response = await axios.post(
-                "http://localhost:2180/api/v1/follow_up",
+                "https://yauiuxmk8rlxkj-2180.proxy.runpod.net/api/v1/follow_up",
                 {
                     symptoms_diseases: symptoms_diseases,
                     snomed_concept_ids: snomed_concept_ids,
@@ -211,7 +211,7 @@ Shall we proceed?
 
             // Send a request to the summary report API
             const response = await axios.post(
-                "http://localhost:2180/api/v1/summary",
+                "https://yauiuxmk8rlxkj-2180.proxy.runpod.net/api/v1/summary",
                 {
                     snomed_concept_ids: snomed_concept_ids,
                     symptoms_diseases: symptoms_diseases,
@@ -238,7 +238,7 @@ Shall we proceed?
     const fetchGraph = async (responses) => {
         try {
             const response = await axios.post(
-                "http://localhost:2180/api/v1/graph",
+                "https://yauiuxmk8rlxkj-2180.proxy.runpod.net/api/v1/graph",
                 {
                     snomed_concepts: responses.semanticSearch.snomed_concept_ids
                 },
