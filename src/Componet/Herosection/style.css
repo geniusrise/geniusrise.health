@@ -8,6 +8,8 @@
     margin-bottom: 2rem;
     border-radius: 20px;
     border: 2px solid #f34960;
+    align-items: center;
+    justify-content: center;
 }
 
 .chat-box {
@@ -20,6 +22,13 @@
     color: white;
     background-color: inherit;
     font-size: large;
+}
+
+.chat-iframe {
+    height: 35rem;
+    width: 100%;
+    right: 0px;;
+    display:block;
 }
 
 .text-user {

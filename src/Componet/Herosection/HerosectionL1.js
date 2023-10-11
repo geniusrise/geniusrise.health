@@ -392,13 +392,11 @@ So, what brings you here today?`,
             <section className="hero-banner position-relative custom-py-0 hero-shape1">
                 <div className="container">
                     <div className="row align-items-center">
-                        <div className="col-12 col-lg-6 col-xl-6 order-lg-1 mb-8 mb-lg-0">
-                            {/* <!-- Image --> */}
-                            <img src={graphImage || require("../../assets/images/connectome1.png")} className="img-fluid" alt="..." />
-                        </div>
-                        <div className="col-12 col-lg-6 col-xl-6">
+
+                        <div className="col-12 col-lg-12 col-xl-12">
                             <div className="chat-window">
-                                <Form.Field>
+                                <iframe className="chat-iframe" src="https://www.youtube.com/embed/by0u8GvUlRU?si=vFfaiKMAn6e_WYK3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                {/* <Form.Field>
                                     <Form.Label className="text-dark text-center">
                                         Try out our in-patient genius.
                                     </Form.Label>
@@ -440,7 +438,7 @@ So, what brings you here today?`,
                                         }}
                                         onKeyDown={handleKeyDown}
                                     />
-                                </Form.Field>
+                                </Form.Field> */}
                             </div>
                         </div>
                     </div>
