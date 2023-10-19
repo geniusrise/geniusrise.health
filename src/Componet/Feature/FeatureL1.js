@@ -1,14 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
-import './style.css';
+import React, { useEffect, useRef, useState } from "react"
+import "./style.css"
 
 function FeatureL1() {
-    var [buttonText, setButtonText] = useState('Get your own Genius');
+    var [buttonText, setButtonText] = useState("Get your own Genius")
 
-    const comingSoon = () => {};
+    const comingSoon = () => {}
 
     const gototop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
+        window.scrollTo({ top: 0, behavior: "smooth" })
+    }
 
     return (
         <>
@@ -19,8 +19,8 @@ function FeatureL1() {
                             <h2 className="mb-5">Say hello to your clinical AI assistants</h2>
                             {/* <!-- Buttons --> */}
                             <div className="btn btn-primary custom-button" onClick={comingSoon}>
-                                {' '}
-                                <h2 className="custom-get-text">{buttonText}</h2>{' '}
+                                {" "}
+                                <h2 className="custom-get-text">{buttonText}</h2>{" "}
                             </div>
                             <blockquote className="mt-5 mb-0 ps-3 border-start border-primary">
                                 {/* <!-- Text --> */}
@@ -80,7 +80,7 @@ function FeatureL1() {
                 </div>
             </section>
         </>
-    );
+    )
 }
 
-export default FeatureL1;
+export default FeatureL1
