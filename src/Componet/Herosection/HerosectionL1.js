@@ -271,7 +271,7 @@ Shall we proceed?
             type: QuestionTypes.INITIAL,
             question: `### Hello! 👋
 
-I'm your health assistant at geniusrise.health. I'm here to guide you to the right care, quickly.
+I'm your health assistant at genius.doctor. I'm here to guide you to the right care, quickly.
 
 Here's how it works:
 

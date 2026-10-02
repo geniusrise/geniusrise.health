@@ -124,7 +124,7 @@ const BlogListing2Comp = () => {
                                 <div>
                                     {' '}
                                     <a class="btn-link rounded d-inline-block p-2 bg-white m-1" href="/">
-                                        geniusrise.health
+                                        genius.doctor
                                     </a>
                                     <a class="btn-link rounded d-inline-block p-2 bg-white m-1" href="/">
                                         Web Design

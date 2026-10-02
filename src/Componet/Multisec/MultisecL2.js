@@ -25,7 +25,7 @@ function MultisecL2() {
                                 <span className="font-w-4 d-block">Perfect Solution</span> For your Small Business
                             </h2>
                             <p className="lead">
-                                geniusrise.health Amazing Landing Page of businesses need access to development
+                                genius.doctor Amazing Landing Page of businesses need access to development
                                 resources.
                             </p>
                         </div>

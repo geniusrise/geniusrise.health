@@ -15,7 +15,7 @@ function BlogL2() {
                         </div>
                         <div class="col-12 col-lg-6 mt-3 my-lg-0">
                             <p class="lead mb-0">
-                                geniusrise.health Amazing Landing Page of businesses need access to development
+                                genius.doctor Amazing Landing Page of businesses need access to development
                                 resources.
                             </p>
                         </div>
@@ -44,7 +44,7 @@ function BlogL2() {
                                     </div>
                                     <h2 class="h5 my-3">
                                         <a class="link-title" href="blog-single.html">
-                                            geniusrise.health trending landing page 2020
+                                            genius.doctor trending landing page 2020
                                         </a>
                                     </h2>
                                     <ul class="list-inline mb-0">

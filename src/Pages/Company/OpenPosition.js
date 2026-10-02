@@ -86,7 +86,7 @@ function OpenPosition() {
                                                 <i className="las la-check" />
                                             </div>
                                             <p className="mb-0 ms-3">
-                                                geniusrise.health discovering the source behind the ubiquitous
+                                                genius.doctor discovering the source behind the ubiquitous
                                             </p>
                                         </div>
                                         <div className="d-flex align-items-center mb-3">

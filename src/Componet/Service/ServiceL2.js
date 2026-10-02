@@ -26,7 +26,7 @@ function ServiceL2() {
                                             aria-expanded="true"
                                             aria-controls="collapseOne"
                                         >
-                                            When our power of choice geniusrise.health ?
+                                            When our power of choice genius.doctor ?
                                         </button>
                                     </h2>
                                     <div
@@ -105,7 +105,7 @@ function ServiceL2() {
                                         </div>
                                         <h5 className="mt-4 mb-3">Easy To Use</h5>
                                         <p className="mb-0">
-                                            Taking design from geniusrise.health design and typography, contemporary
+                                            Taking design from genius.doctor design and typography, contemporary
                                             page layouts.
                                         </p>
                                     </div>
@@ -120,7 +120,7 @@ function ServiceL2() {
                                         </div>
                                         <h5 className="mt-4 mb-3">Cloud Migration</h5>
                                         <p className="mb-0">
-                                            Taking design from geniusrise.health design and typography, contemporary
+                                            Taking design from genius.doctor design and typography, contemporary
                                             page layouts.
                                         </p>
                                     </div>
@@ -135,7 +135,7 @@ function ServiceL2() {
                                         </div>
                                         <h5 className="mt-4 mb-3">Data Analysis</h5>
                                         <p className="mb-0">
-                                            Taking design from geniusrise.health design and typography, contemporary
+                                            Taking design from genius.doctor design and typography, contemporary
                                             page layouts.
                                         </p>
                                     </div>
@@ -150,7 +150,7 @@ function ServiceL2() {
                                         </div>
                                         <h5 className="mt-4 mb-3">Software Design</h5>
                                         <p className="mb-0">
-                                            Taking design from geniusrise.health design and typography, contemporary
+                                            Taking design from genius.doctor design and typography, contemporary
                                             page layouts.
                                         </p>
                                     </div>

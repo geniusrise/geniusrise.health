@@ -26,7 +26,7 @@ function MultisecL1() {
                             <div className="mb-5">
                                 <h2>
                                     <span className="font-w-4 d-block">Discover even</span> more possibilities with
-                                    geniusrise.health
+                                    genius.doctor
                                 </h2>
                                 <p className="lead mb-0">We are just getting started.</p>
                             </div>

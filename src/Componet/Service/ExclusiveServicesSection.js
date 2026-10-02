@@ -22,7 +22,7 @@ const ExclusiveServicesSection = () => {
                             </div>
                             <h5 className="mt-4 mb-3">Dashboard</h5>
                             <p className="mb-0">
-                                Taking design from geniusrise.health design and typography, contemporary page layouts.
+                                Taking design from genius.doctor design and typography, contemporary page layouts.
                             </p>
                         </div>
                         <div className="px-lg-7 px-4 py-5 rounded bg-white shadow text-center mt-5">
@@ -31,7 +31,7 @@ const ExclusiveServicesSection = () => {
                             </div>
                             <h5 className="mt-4 mb-3">Easy to use</h5>
                             <p className="mb-0">
-                                Taking design from geniusrise.health design and typography, contemporary page layouts.
+                                Taking design from genius.doctor design and typography, contemporary page layouts.
                             </p>
                         </div>
                     </div>
@@ -42,7 +42,7 @@ const ExclusiveServicesSection = () => {
                             </div>
                             <h5 className="mt-4 mb-3">Clean code</h5>
                             <p className="mb-0">
-                                Taking design from geniusrise.health design and typography, contemporary page layouts.
+                                Taking design from genius.doctor design and typography, contemporary page layouts.
                             </p>
                         </div>
                         <div className="px-lg-7 px-4 py-5 rounded bg-white shadow text-center mt-5">
@@ -51,7 +51,7 @@ const ExclusiveServicesSection = () => {
                             </div>
                             <h5 className="mt-4 mb-3">User Friendly</h5>
                             <p className="mb-0">
-                                Taking design from geniusrise.health design and typography, contemporary page layouts.
+                                Taking design from genius.doctor design and typography, contemporary page layouts.
                             </p>
                         </div>
                     </div>

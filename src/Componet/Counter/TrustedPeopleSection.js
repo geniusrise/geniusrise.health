@@ -9,7 +9,7 @@ const TrustedPeopleSection = () => {
                     <div className="col-lg-4">
                         <div>
                             <h2 className="mb-0">
-                                <span className="font-w-4 d-block">Trusted people</span> with geniusrise.health
+                                <span className="font-w-4 d-block">Trusted people</span> with genius.doctor
                             </h2>
                         </div>
                     </div>

@@ -18,7 +18,7 @@ function BlogL3() {
                                     <span className="font-w-4 d-block">From Our Blog</span> List Latest Feed
                                 </h2>
                                 <p className="lead mb-0 text-light">
-                                    geniusrise.health Amazing Landing Page of businesses need access to development
+                                    genius.doctor Amazing Landing Page of businesses need access to development
                                     resources.
                                 </p>
                             </div>

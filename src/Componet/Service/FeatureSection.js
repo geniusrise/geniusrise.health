@@ -16,7 +16,7 @@ const FeatureSection = () => {
                                     </div>
                                     <h5 className="mt-4 mb-3">Easy To Use</h5>
                                     <p className="mb-0">
-                                        Taking design from geniusrise.health design and typography, contemporary page
+                                        Taking design from genius.doctor design and typography, contemporary page
                                         layouts.
                                     </p>
                                 </div>
@@ -30,7 +30,7 @@ const FeatureSection = () => {
                                     </div>
                                     <h5 className="mt-4 mb-3">Cloud Migration</h5>
                                     <p className="mb-0">
-                                        Taking design from geniusrise.health design and typography, contemporary page
+                                        Taking design from genius.doctor design and typography, contemporary page
                                         layouts.
                                     </p>
                                 </div>
@@ -44,7 +44,7 @@ const FeatureSection = () => {
                                     </div>
                                     <h5 className="mt-4 mb-3">Data Analysis</h5>
                                     <p className="mb-0">
-                                        Taking design from geniusrise.health design and typography, contemporary page
+                                        Taking design from genius.doctor design and typography, contemporary page
                                         layouts.
                                     </p>
                                 </div>
@@ -58,7 +58,7 @@ const FeatureSection = () => {
                                     </div>
                                     <h5 className="mt-4 mb-3">Software Design</h5>
                                     <p className="mb-0">
-                                        Taking design from geniusrise.health design and typography, contemporary page
+                                        Taking design from genius.doctor design and typography, contemporary page
                                         layouts.
                                     </p>
                                 </div>

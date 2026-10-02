@@ -19,25 +19,25 @@ function Service() {
             icon: 'flaticon-dashboard',
             bgColor: '#d0faec',
             title: 'Fast Messaging',
-            description: 'Taking design from geniusrise.health design and typography layouts.',
+            description: 'Taking design from genius.doctor design and typography layouts.',
         },
         {
             icon: 'flaticon-relationship',
             bgColor: '#ffeff8',
             title: 'User Friendly',
-            description: 'Taking design from geniusrise.health design and typography layouts.',
+            description: 'Taking design from genius.doctor design and typography layouts.',
         },
         {
             icon: 'flaticon-solution',
             bgColor: '#d3f6fe',
             title: 'Live Chat',
-            description: 'Taking design from geniusrise.health design and typography layouts.',
+            description: 'Taking design from genius.doctor design and typography layouts.',
         },
         {
             icon: 'flaticon-system',
             bgColor: '#fff5d9',
             title: '24/7 Support',
-            description: 'Taking design from geniusrise.health design and typography layouts.',
+            description: 'Taking design from genius.doctor design and typography layouts.',
         },
     ];
 
@@ -77,7 +77,7 @@ function Service() {
                         <div class="col-lg-8 col-12">
                             <div class="mb-5">
                                 <h2 class="mb-0">
-                                    <span class="font-w-4 d-block">geniusrise.health provide Unique</span> smart
+                                    <span class="font-w-4 d-block">genius.doctor provide Unique</span> smart
                                     features
                                 </h2>
                             </div>

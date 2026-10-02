@@ -1,5 +1,5 @@
 /* ------------------------------------------------
-  Project:   geniusrise.health - Bootstrap 5 Multipurpose Landing Page
+  Project:   genius.doctor - Bootstrap 5 Multipurpose Landing Page
   Author:    ThemeHt
 ------------------------------------------------ */
 /* ------------------------

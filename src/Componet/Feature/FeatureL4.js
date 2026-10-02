@@ -6,17 +6,17 @@ const featuresData = [
     {
         icon: 'flaticon-prototype-1',
         title: 'Awesome Design',
-        description: 'Taking design from geniusrise.health design and typography, contemporary page layouts.',
+        description: 'Taking design from genius.doctor design and typography, contemporary page layouts.',
     },
     {
         icon: 'flaticon-lightbulb',
         title: 'Easy to Use',
-        description: 'Taking design from geniusrise.health design and typography, contemporary page layouts.',
+        description: 'Taking design from genius.doctor design and typography, contemporary page layouts.',
     },
     {
         icon: 'flaticon-friendship',
         title: 'User Friendly',
-        description: 'Taking design from geniusrise.health design and typography, contemporary page layouts.',
+        description: 'Taking design from genius.doctor design and typography, contemporary page layouts.',
     },
 ];
 
@@ -46,7 +46,7 @@ function FeatureL4() {
                     <Col lg="4">
                         <div>
                             <h2 className="mb-0">
-                                <span className="font-w-4 d-block">Trusted people </span> with geniusrise.health
+                                <span className="font-w-4 d-block">Trusted people </span> with genius.doctor
                             </h2>
                         </div>
                     </Col>

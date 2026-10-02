@@ -22,7 +22,7 @@ const AccordionPage = () => {
                                                 aria-expanded="true"
                                                 aria-controls="collapseOne"
                                             >
-                                                When our power of choice geniusrise.health ?
+                                                When our power of choice genius.doctor ?
                                             </button>
                                         </h2>
                                         <div

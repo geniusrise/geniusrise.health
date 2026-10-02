@@ -6,37 +6,37 @@ const features = [
         icon: 'flaticon-dashboard',
         background: '#d0faec',
         title: 'Dashboard',
-        description: 'Taking design from geniusrise.health design and typography layouts.',
+        description: 'Taking design from genius.doctor design and typography layouts.',
     },
     {
         icon: 'flaticon-relationship',
         background: '#ffeff8',
         title: 'Management',
-        description: 'Taking design from geniusrise.health design and typography layouts.',
+        description: 'Taking design from genius.doctor design and typography layouts.',
     },
     {
         icon: 'flaticon-solution',
         background: '#d3f6fe',
         title: 'Platform',
-        description: 'Taking design from geniusrise.health design and typography layouts.',
+        description: 'Taking design from genius.doctor design and typography layouts.',
     },
     {
         icon: 'flaticon-system',
         background: '#fff5d9',
         title: 'Integrations',
-        description: 'Taking design from geniusrise.health design and typography layouts.',
+        description: 'Taking design from genius.doctor design and typography layouts.',
     },
     {
         icon: 'flaticon-friendship',
         background: '#fdf9ee',
         title: 'User Friendly',
-        description: 'Taking design from geniusrise.health design and typography layouts.',
+        description: 'Taking design from genius.doctor design and typography layouts.',
     },
     {
         icon: 'flaticon-call-center-1',
         background: '#e5f5f5',
         title: 'Quick Support',
-        description: 'Taking design from geniusrise.health design and typography layouts.',
+        description: 'Taking design from genius.doctor design and typography layouts.',
     },
 ];
 

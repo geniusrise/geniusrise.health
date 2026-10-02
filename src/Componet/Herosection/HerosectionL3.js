@@ -17,7 +17,7 @@ function HerosectionL3() {
                     <div class="row align-items-center justify-content-between">
                         <div class="col-12 col-lg-5">
                             <h1 class="mb-4 font-w-4">
-                                geniusrise.health help you work <span class="font-w-6 text-primary">smarter</span>, not{' '}
+                                genius.doctor help you work <span class="font-w-6 text-primary">smarter</span>, not{' '}
                                 <span class="font-w-6 text-primary">harder</span>
                             </h1>
                             <p class="lead mb-4">

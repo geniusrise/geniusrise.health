@@ -19,7 +19,7 @@ const BlogStyle2 = () => {
                     </div>
                     <div className="col-12 col-lg-6 mt-3 my-lg-0">
                         <p className="lead mb-0">
-                            geniusrise.health Amazing Landing Page of businesses need access to development resources.
+                            genius.doctor Amazing Landing Page of businesses need access to development resources.
                         </p>
                     </div>
                 </div>

@@ -48,7 +48,7 @@ function BlogSingle() {
                                         </p>
                                     </div>
                                     <p>
-                                        geniusrise.health reiciendis odio perferendis libero saepe voluptatum fugiat
+                                        genius.doctor reiciendis odio perferendis libero saepe voluptatum fugiat
                                         dolore voluptates aut, ut quas doloremque quo ad quis ipsum molestias neque
                                         pariatur commodi. Doloribus, quidem, earum! Quo fugiat voluptates similique
                                         quidem dolorem ex non quibusdam odio suscipit error, maiores, itaque blanditiis

@@ -15,7 +15,7 @@ function BlogL1() {
                         </div>
                         <div className="col-12 col-md-12 col-lg-5 ps-lg-5 my-3 my-lg-0">
                             <p className="lead mb-0">
-                                geniusrise.health Amazing Landing Page of businesses need access to development
+                                genius.doctor Amazing Landing Page of businesses need access to development
                                 resources.
                             </p>
                         </div>
@@ -46,7 +46,7 @@ function BlogL1() {
                                     </div>
                                     <h2 className="h5 my-3">
                                         <a className="link-title" href="blog-single.html">
-                                            geniusrise.health trending landing page 2020
+                                            genius.doctor trending landing page 2020
                                         </a>
                                     </h2>
                                     <ul className="list-inline mb-0">
@@ -138,7 +138,7 @@ function BlogL1() {
                                     </div>
                                     <h2 className="h5 my-3">
                                         <a className="link-title" href="blog-single.html">
-                                            How to growth business with geniusrise.health
+                                            How to growth business with genius.doctor
                                         </a>
                                     </h2>
                                     <ul className="list-inline mb-0">

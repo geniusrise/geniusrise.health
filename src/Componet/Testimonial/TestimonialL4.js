@@ -147,7 +147,7 @@ function TestimonialL4() {
                                     {' '}
                                     <i class="las la-quote-left ic-2x text-white bg-primary rounded-circle p-1"></i>
                                     <p class="font-w-5 lead my-3 text-light">
-                                        geniusrise.health Amazing Landing Page All-in-one, clean code, Crative &amp;
+                                        genius.doctor Amazing Landing Page All-in-one, clean code, Crative &amp;
                                         Modern design Professional Recommended crofessional and great experience.
                                     </p>
                                     <div class="d-flex align-items-center">
@@ -172,7 +172,7 @@ function TestimonialL4() {
                                     {' '}
                                     <i class="las la-quote-left ic-2x text-white bg-primary rounded-circle p-1"></i>
                                     <p class="font-w-5 lead my-3 text-light">
-                                        geniusrise.health Amazing Landing Page All-in-one, clean code, Crative &amp;
+                                        genius.doctor Amazing Landing Page All-in-one, clean code, Crative &amp;
                                         Modern design Professional Recommended crofessional and great experience.
                                     </p>
                                     <div class="d-flex align-items-center">
@@ -195,7 +195,7 @@ function TestimonialL4() {
                                     {' '}
                                     <i class="las la-quote-left ic-2x text-white bg-primary rounded-circle p-1"></i>
                                     <p class="font-w-5 lead my-3 text-light">
-                                        geniusrise.health Amazing Landing Page All-in-one, clean code, Crative &amp;
+                                        genius.doctor Amazing Landing Page All-in-one, clean code, Crative &amp;
                                         Modern design Professional Recommended crofessional and great experience.
                                     </p>
                                     <div class="d-flex align-items-center">

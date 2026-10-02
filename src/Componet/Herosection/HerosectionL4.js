@@ -12,7 +12,7 @@ function HerosectionL4() {
                         </div>
                         <div className="col-12 col-lg-7 col-xl-6 order-lg-1">
                             <h1 className="display-4 mb-3">
-                                geniusrise.health Your App <span className="font-w-7">Batter & Faster</span>
+                                genius.doctor Your App <span className="font-w-7">Batter & Faster</span>
                             </h1>
                             {/* <!-- Text --> */}
                             <p className="lead text-muted mb-4">

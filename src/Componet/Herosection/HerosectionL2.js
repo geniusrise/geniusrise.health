@@ -155,9 +155,9 @@ function HerosectionL2() {
                                     |
                                 </span>
                             </h6>
-                            <h1 className="mb-5 text-white">Unlock Your Technology With Smart geniusrise.health</h1>
+                            <h1 className="mb-5 text-white">Unlock Your Technology With Smart genius.doctor</h1>
                             {/* <!-- Buttons -->  */}
-                            <div className="btn btn-white">Start With Your geniusrise.health</div>
+                            <div className="btn btn-white">Start With Your genius.doctor</div>
                         </div>
                     </div>
                     {/* <!-- / .row --> */}

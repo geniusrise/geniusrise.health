@@ -12,7 +12,7 @@ function StepL3() {
                         <div className="col-lg-8">
                             <div className="mb-5">
                                 <h2 className="mb-0">
-                                    <span className="font-w-4 d-block">Working with geniusrise.health</span> simple
+                                    <span className="font-w-4 d-block">Working with genius.doctor</span> simple
                                     three step
                                 </h2>
                             </div>
@@ -29,7 +29,7 @@ function StepL3() {
                                 </div>
                                 <h4 className="mt-4 mb-2">Submit Your Task</h4>
                                 <p className="mb-0 text-light">
-                                    Taking design from geniusrise.health design and typography, contemporary page
+                                    Taking design from genius.doctor design and typography, contemporary page
                                     layouts.
                                 </p>
                             </div>
@@ -42,9 +42,9 @@ function StepL3() {
                                         02
                                     </span>
                                 </div>
-                                <h4 className="mt-4 mb-2">geniusrise.health Expert</h4>
+                                <h4 className="mt-4 mb-2">genius.doctor Expert</h4>
                                 <p className="mb-0 text-light">
-                                    Taking design from geniusrise.health design and typography, contemporary page
+                                    Taking design from genius.doctor design and typography, contemporary page
                                     layouts.
                                 </p>
                             </div>
@@ -59,7 +59,7 @@ function StepL3() {
                                 </div>
                                 <h4 className="mt-4 mb-2">Result Delivered</h4>
                                 <p className="mb-0 text-light">
-                                    Taking design from geniusrise.health design and typography, contemporary page
+                                    Taking design from genius.doctor design and typography, contemporary page
                                     layouts.
                                 </p>
                             </div>

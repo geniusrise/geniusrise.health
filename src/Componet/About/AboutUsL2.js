@@ -37,7 +37,7 @@ function AboutUsL2() {
                                             <span className="list-dot" data-bg-color="#2f2f41"></span>
                                         </div>
                                         <p className="mb-0">
-                                            geniusrise.health Landing Page Build With Static Bootstarp Code
+                                            genius.doctor Landing Page Build With Static Bootstarp Code
                                         </p>
                                     </div>
                                 </div>

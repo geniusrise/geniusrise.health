@@ -13,7 +13,7 @@ const FeatureSection3 = () => {
                             </div>
                             <h5 className="mt-4 mb-3">Awesome Design</h5>
                             <p className="mb-0">
-                                Taking design from geniusrise.health design and typography, contemporary page layouts.
+                                Taking design from genius.doctor design and typography, contemporary page layouts.
                             </p>
                         </div>
                     </div>
@@ -25,7 +25,7 @@ const FeatureSection3 = () => {
                             </div>
                             <h5 className="mt-4 mb-3">Easy to Use</h5>
                             <p className="mb-0">
-                                Taking design from geniusrise.health design and typography, contemporary page layouts.
+                                Taking design from genius.doctor design and typography, contemporary page layouts.
                             </p>
                         </div>
                     </div>
@@ -37,7 +37,7 @@ const FeatureSection3 = () => {
                             </div>
                             <h5 className="mt-4 mb-3">User Friendly</h5>
                             <p className="mb-0">
-                                Taking design from geniusrise.health design and typography, contemporary page layouts.
+                                Taking design from genius.doctor design and typography, contemporary page layouts.
                             </p>
                         </div>
                     </div>

@@ -10,7 +10,7 @@ const CounterSection = () => {
                         <div className="mb-5">
                             <h2>
                                 <span className="font-w-4 d-block">Discover even</span> more possibility with
-                                geniusrise.health
+                                genius.doctor
                             </h2>
                             <p className="lead mb-0">
                                 We use the latest technologies it voluptatem accusantium doloremque laudantium.

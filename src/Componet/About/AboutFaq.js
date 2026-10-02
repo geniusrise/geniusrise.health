@@ -26,7 +26,7 @@ function AboutFAQ() {
                                             aria-expanded={openAccordion === 1}
                                             aria-controls="collapseOne"
                                         >
-                                            When our power of choice geniusrise.health ?
+                                            When our power of choice genius.doctor ?
                                         </button>
                                     </h2>
                                     <Collapse

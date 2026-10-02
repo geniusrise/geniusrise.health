@@ -4,7 +4,7 @@ function TestimonialL3() {
         {
             img: require('../../assets/images/testimonial/01.jpg'),
             details:
-                'geniusrise.health Amazing Landing Page All-in-one, clean code, Crative & Modern design Professional Recommended crofessional and great experience.',
+                'genius.doctor Amazing Landing Page All-in-one, clean code, Crative & Modern design Professional Recommended crofessional and great experience.',
             icon: 'las la-quote-left ic-2x text-white bg-primary rounded-circle p-1',
             name: 'Romi Jensen',
             role: '- Founder',
@@ -21,7 +21,7 @@ function TestimonialL3() {
                                     <div className="col-md-6">
                                         <div className="mb-5">
                                             <h2 className="mb-0">
-                                                <span className="font-w-4 d-block">Working with geniusrise.health</span>{' '}
+                                                <span className="font-w-4 d-block">Working with genius.doctor</span>{' '}
                                                 simple three step
                                             </h2>
                                         </div>
@@ -30,7 +30,7 @@ function TestimonialL3() {
                                                 {' '}
                                                 <i className={item.icon}></i>
                                                 <p className="font-w-5 lead my-3">
-                                                    geniusrise.health Amazing Landing Page All-in-one, clean code,
+                                                    genius.doctor Amazing Landing Page All-in-one, clean code,
                                                     Crative &amp; Modern design Professional Recommended crofessional
                                                     and great experience.
                                                 </p>
@@ -56,7 +56,7 @@ function TestimonialL3() {
                                                 {' '}
                                                 <i className={item.icon}></i>
                                                 <p className="font-w-5 lead my-3">
-                                                    geniusrise.health Amazing Landing Page All-in-one, clean code,
+                                                    genius.doctor Amazing Landing Page All-in-one, clean code,
                                                     Crative &amp; Modern design Professional Recommended crofessional
                                                     and great experience.
                                                 </p>
@@ -80,7 +80,7 @@ function TestimonialL3() {
                                                 {' '}
                                                 <i className="las la-quote-left ic-2x text-white bg-primary rounded-circle p-1"></i>
                                                 <p className="font-w-5 lead my-3 text-light">
-                                                    geniusrise.health Amazing Landing Page All-in-one, clean code,
+                                                    genius.doctor Amazing Landing Page All-in-one, clean code,
                                                     Crative &amp; Modern design Professional Recommended crofessional
                                                     and great experience.
                                                 </p>

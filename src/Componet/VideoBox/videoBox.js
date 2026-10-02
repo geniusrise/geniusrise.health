@@ -31,9 +31,9 @@ function VideoBox1() {
                     </div>
                 </div>
                 <div className="card-body p-4">
-                    <h5>Watch make it simple to take your business success with geniusrise.health.</h5>
+                    <h5>Watch make it simple to take your business success with genius.doctor.</h5>
                     <p className="mb-0">
-                        geniusrise.health Amazing Landing Page of businesses need access to development resources.
+                        genius.doctor Amazing Landing Page of businesses need access to development resources.
                     </p>
                 </div>
             </div>

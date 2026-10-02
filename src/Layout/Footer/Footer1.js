@@ -37,14 +37,14 @@ function Footer1() {
                                 Geniusrise<span className="text-dark font-w-4"> Health.</span>
                             </Link>
                             <p className="my-3">
-                                geniusrise.health - clinical AI assistants for hospitals, clinics and healthcare
+                                genius.doctor - clinical AI assistants for hospitals, clinics and healthcare
                                 practices.
                             </p>
                             <ul className="list-inline">
                                 <li className="list-inline-item">
                                     <Link
                                         className="border rounded px-2 py-1 text-dark"
-                                        to="https://github.com/geniusrise"
+                                        to="https://github.com/genius doctor"
                                     >
                                         <i className="la la-github"></i>
                                     </Link>
@@ -60,7 +60,7 @@ function Footer1() {
                                 <li className="list-inline-item">
                                     <Link
                                         className="border rounded px-2 py-1 text-dark"
-                                        to="https://www.linkedin.com/company/geniusrise/"
+                                        to="https://www.linkedin.com/company/genius doctor/"
                                     >
                                         <i className="la la-linkedin"></i>
                                     </Link>
@@ -68,7 +68,7 @@ function Footer1() {
                                 <li className="list-inline-item">
                                     <Link
                                         className="border rounded px-2 py-1 text-dark"
-                                        to="https://huggingface.co/geniusrise"
+                                        to="https://huggingface.co/genius doctor"
                                     >
                                         <i className="la la-facebook"></i>
                                     </Link>
@@ -81,19 +81,19 @@ function Footer1() {
                                     <h5 className="mb-4">Pages</h5>
                                     <ul className="list-unstyled mb-0">
                                         <li className="mb-3">
-                                            <Link className="list-group-item-action" to="https://geniusrise.ai">
+                                            <Link className="list-group-item-action" to="https://genius doctor.ai">
                                                 Geniusrise
                                             </Link>
                                         </li>
                                         <li className="mb-3">
-                                            <Link className="list-group-item-action" to="https://github.com/geniusrise">
+                                            <Link className="list-group-item-action" to="https://github.com/genius doctor">
                                                 Github
                                             </Link>
                                         </li>
                                         <li>
                                             <Link
                                                 className="list-group-item-action"
-                                                to="https://huggingface.co/geniusrise"
+                                                to="https://huggingface.co/genius doctor"
                                             >
                                                 Huggingface
                                             </Link>
@@ -109,8 +109,8 @@ function Footer1() {
                                         </p>
                                     </div>
                                     <div className="mb-3">
-                                        <Link className="btn-link text-dark" to="mailto:hello@geniusrise.ai">
-                                            hello@geniusrise.ai
+                                        <Link className="btn-link text-dark" to="mailto:hello@genius doctor.ai">
+                                            hello@genius doctor.ai
                                         </Link>
                                     </div>
                                 </div>
@@ -124,12 +124,12 @@ function Footer1() {
                     </div>
                     <div className="row align-items-center mb-5">
                         <div className="col-md-6">
-                            Copyright ©2023 All rights reserved | geniusrise.health is made by<span> </span>
+                            Copyright ©2023 All rights reserved | genius.doctor is made by<span> </span>
                             <i className="lar la-heart text-primary heartBeat2"> </i>
                             <u>
-                                <Link className="text-primary" to="https://geniusrise.ai">
+                                <Link className="text-primary" to="https://genius doctor.ai">
                                     {' '}
-                                    geniusrise.ai
+                                    genius doctor.ai
                                 </Link>
                             </u>
                         </div>

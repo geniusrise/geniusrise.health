@@ -8,24 +8,24 @@ function FeatureL3() {
     const data1 = [
         {
             service: 'Dashboard',
-            details: 'Taking design from geniusrise.health design and typography, contemporary page layouts.',
+            details: 'Taking design from genius.doctor design and typography, contemporary page layouts.',
             img: svg1,
         },
         {
             service: 'Easy to use',
-            details: 'Taking design from geniusrise.health design and typography, contemporary page layouts.',
+            details: 'Taking design from genius.doctor design and typography, contemporary page layouts.',
             img: svg2,
         },
     ];
     const data2 = [
         {
             service: 'Clean code',
-            details: 'Taking design from geniusrise.health design and typography, contemporary page layouts.',
+            details: 'Taking design from genius.doctor design and typography, contemporary page layouts.',
             img: svg3,
         },
         {
             service: 'User Friendly',
-            details: 'Taking design from geniusrise.health design and typography, contemporary page layouts.',
+            details: 'Taking design from genius.doctor design and typography, contemporary page layouts.',
             img: svg4,
         },
     ];
